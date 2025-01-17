@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 09:26:36 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/16 12:35:50 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:12:01 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	ft_countword(const char *s, char c)
 	while (*s)
 	{
 		if (*s == c)
-		{	
+		{
 			if (word_flag == 1)
 			{
 				count++;

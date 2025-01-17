@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/17 17:01:03 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:10:25 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,22 @@ typedef struct s_node
 	struct s_node	*prev;
 }	t_node;
 
-t_node *swap_stack(t_node *lst);
-t_node	*rotate_stack(t_node *lst);
-t_node	*reverse_rotate(t_node *lst);
-void	push_stack(t_node **stack_1, t_node **stack_2);
+t_node		*swap_stack(t_node *lst);
+t_node		*rotate_stack(t_node *lst);
+t_node		*reverse_rotate(t_node *lst);
+void		push_stack(t_node **stack_1, t_node **stack_2);
 
-int	node_lst_size(t_node *lst);
-void 	print_list(t_node *lst);
-void 	free_list(t_node *lst);
-t_node	*ft_doubly_lstnew(int content);
-t_node	*create_stack(char	**arr);
+int			node_lst_size(t_node *lst);
+void		print_list(t_node *lst);
+void		free_list(t_node *lst);
+t_node		*ft_doubly_lstnew(int content);
+t_node		*create_stack(char	**arr);
 
-
-int	ft_empty_str(char *str);
-int ft_is_valid_number(char	*str);
-int	ft_not_duplicate_input(char **arr);
+int			ft_empty_str(char *str);
+int			ft_is_valid_number(char	*str);
+int			ft_not_duplicate_input(char **arr);
 long long	ft_atoi_long(const char *nptr);
-int	ft_valid_input(char **input_arr);
-char **ft_handle_input(int argc, char *argv[]);
-
-
+int			ft_valid_input(char **input_arr);
+char		**ft_handle_input(int argc, char *argv[]);
 
 #endif

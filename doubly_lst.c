@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/17 16:57:05 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:14:44 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,24 @@ int	node_lst_size(t_node *lst)
 	while (lst)
 	{
 		count++;
-		lst = lst->next;	
+		lst = lst->next;
 	}
 	return (count);
-
 }
 
-void print_list(t_node *lst)
+void	print_list(t_node *lst)
 {
 	if (!lst)
 		return ;
 	while (lst)
-		{
-			printf("%d ", lst->content);
-			lst = lst->next;
-		}
+	{
+		printf("%d ", lst->content);
+		lst = lst->next;
+	}
 	printf("\n");
 }
 
-void free_list(t_node *lst)
+void	free_list(t_node *lst)
 {
 	t_node	*temp;
 
@@ -71,7 +70,7 @@ t_node	*create_stack(char	**arr)
 	t_node	*lst;
 	t_node	*temp;
 	t_node	*new;
-	
+
 	lst = NULL;
 	temp = NULL;
 	while (*arr)
