@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/17 17:17:09 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/17 21:46:15 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,6 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 #include <stdint.h>
-
-int	ft_valid_input(char **input_arr)
-{
-	int	i;
-
-	i = 0;
-	if (ft_not_duplicate_input(input_arr) != 0)
-	{
-		ft_printf("Error: Duplicate input\n");
-		return (-1);
-	}
-	i = 0;
-	while (input_arr[i])
-	{
-		if (ft_is_valid_number(input_arr[i]) != 0 || (ft_atoi_long(input_arr[i])
-				> INT_MAX || ft_atoi_long(input_arr[i]) < INT_MIN))
-		{
-			ft_printf("Error: Not valid integers\n");
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
 
 char	**ft_handle_input(int argc, char *argv[])
 {
