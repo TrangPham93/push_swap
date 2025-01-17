@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 15:05:22 by trpham            #+#    #+#              #
-#    Updated: 2025/01/16 18:00:00 by trpham           ###   ########.fr        #
+#    Updated: 2025/01/17 13:29:35 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS = $(LIBFT_DIR)/ft_isalpha.c \
        $(LIBFT_DIR)/ft_strchr.c \
        $(LIBFT_DIR)/ft_strrchr.c \
        $(LIBFT_DIR)/ft_strncmp.c \
+       $(LIBFT_DIR)/ft_strcmp.c \
        $(LIBFT_DIR)/ft_memchr.c \
        $(LIBFT_DIR)/ft_memcmp.c \
        $(LIBFT_DIR)/ft_strnstr.c \
@@ -52,13 +53,14 @@ SRCS = $(LIBFT_DIR)/ft_isalpha.c \
        $(LIBFT_DIR)/ft_putstr_fd.c \
        $(LIBFT_DIR)/ft_putendl_fd.c \
        $(LIBFT_DIR)/ft_putnbr_fd.c \
+       $(PRINTF_DIR)/ft_printf.c \
        $(PRINTF_DIR)/ft_putchar_fd.c \
-		$(PRINTF_DIR)/ft_putnbr_fd.c \
-		$(PRINTF_DIR)/ft_puthex_fd.c \
-		$(PRINTF_DIR)/ft_putnbr_unsigned.c \
-		$(PRINTF_DIR)/ft_putptr_fd.c \
-		$(PRINTF_DIR)/ft_putstr_fd.c \
-		$(GNL_DIR)/get_next_line.c 
+       $(PRINTF_DIR)/ft_putnbr_fd.c \
+       $(PRINTF_DIR)/ft_puthex_fd.c \
+       $(PRINTF_DIR)/ft_putnbr_unsigned.c \
+       $(PRINTF_DIR)/ft_putptr_fd.c \
+       $(PRINTF_DIR)/ft_putstr_fd.c \
+       $(GNL_DIR)/get_next_line.c 
 
 SRCS_BONUS = $(LIBFT_DIR)/ft_lstnew_bonus.c \
               $(LIBFT_DIR)/ft_lstadd_front_bonus.c \

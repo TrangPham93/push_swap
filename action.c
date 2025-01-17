@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:09:00 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/16 18:31:44 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/17 16:57:28 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
-
-int	node_lst_size(t_node *lst)
-{
-	int	count;
-
-	count = 0;
-	while (lst)
-	{
-		count++;
-		lst = lst->next;	
-	}
-	return (count);
-
-}
 
 t_node *swap_stack(t_node *lst)
 {
@@ -46,9 +32,7 @@ t_node *swap_stack(t_node *lst)
 
 	// set value for node1 and node2
 	node1 = lst;
-	// printf("Value of Node1 :%d\n",node1->content);
 	node2 = lst->next;
-	// printf("Value of Node2 :%d\n",node2->content);
 
 	// swap, but need to ask for more robust option
 	node1->next = node2->next;
@@ -104,4 +88,21 @@ t_node	*reverse_rotate(t_node *lst)
 	tail->next = lst;
 	tail->prev = NULL;
 	return (tail);
+}
+
+void	push_stack(t_node **stack_1, t_node **stack_2)
+{
+	t_node	*head;
+
+	if (*stack_1 == NULL)
+		return ;
+	head = *stack_1;
+	*stack_1 = (*stack_1)->next;
+	(*stack_1)->prev = NULL;
+	
+	head->next = (*stack_2);
+	if (*stack_2)
+		(*stack_2)->prev = head;
+	head->prev = NULL;
+	*stack_2 = head;
 }
