@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/23 13:49:46 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/23 21:39:01 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 #include "./libft/includes/ft_printf.h"
 #include <stdint.h>
 
-void	min_value_sort(t_node **stack_a, t_node **stack_b);
+void	sort_stack_of_three(t_node	**stack_a, t_node **stack_b);
+void	min_value_to_top_sort(t_node **stack_a, t_node **stack_b, int stack_size);
+void	ft_sort(t_node **stack_a, t_node **stack_b);
 int	min_node(t_node **stack_a);
 
 char	**ft_handle_input(int argc, char *argv[])
@@ -50,13 +52,6 @@ char	**ft_handle_input(int argc, char *argv[])
 	return (input_arr);
 }
 
-t_node	*ft_sort(t_node *stack_a)
-{
-	
-	
-	return (stack_a);	
-}
-
 int	main(int argc, char *argv[])
 {
 	t_node	*stack_a;
@@ -71,57 +66,103 @@ int	main(int argc, char *argv[])
 		ft_printf("Error: please input a valid argument \n");
 		return (-1);
 	}
-	stack_a = create_stack(input_arr);
-	ft_sort(stack_a);
-	
 	// print list
 	printf("Print original lst:\n");
 	print_list(stack_a);
+	// sort
+	stack_a = create_stack(input_arr);
+	ft_sort(&stack_a, &stack_b);
 	
-	while (stack_a != NULL)
-	{
-		ft_printf("Sorting stack_a\n");
-		min_value_sort(&stack_a, &stack_b);
-		
-		ft_printf("After min_value_sort, stack_a: ");
-		print_list(stack_a);
-		
-		ft_printf("stack_b: ");
-		print_list(stack_b);
-		ft_printf("\n");
-	}
-	while (stack_b != NULL)
-	{
-		push_stack(&stack_b, &stack_a);
-	}
 	
-	ft_printf("All elements have been sorted and moved to stack_a.\n");
+	
 	print_list(stack_a);
 	print_list(stack_b);	
 	free_list(stack_a);
 	free_list(stack_b);
 	return (0);
 }
-// void	sort_3_numbers(t_node	**stack_a)
-// {
+void	ft_sort(t_node **stack_a, t_node **stack_b)
+{
+	int		stack_size;
 	
-// }
+	if (*stack_a == NULL)
+		return ;
+	stack_size = node_lst_size(*stack_a);
+	ft_printf("stack size %d\n", stack_size);
+	if (stack_size == 1)
+		return ;
+	// else if (stack_size <= 3)
+	// {
+		
+	// 	sort_stack_of_three(stack_a, stack_b);
+	// }
+	else
+	{
+		while (*stack_a != NULL)
+		{
+			// ft_printf("Sorting stack_a\n");
+			min_value_to_top_sort(stack_a, stack_b, stack_size);
+			
+			// ft_printf("After min_value_sort, stack_a: ");
+			// print_list(*stack_a);
+			
+			// ft_printf("stack_b: ");
+			// print_list(*stack_b);
+			// ft_printf("\n");
+		}
+	}
+	// ft_printf("All elements have been sorted and moved to stack_b.\n");
+	// while (stack_b != NULL)
+	// {
+	// 	push_stack(stack_b, stack_a, 'b');
+	// 	if ((*stack_b)->next == NULL)
+	// 	{
+	// 		push_stack(stack_a, stack_b, 'b');
+	// 		return ;
+	// 	}
+	// }
+}
+/*
+Use selection sort to sort stack of 3 numbers
+*/
+void	sort_stack_of_three(t_node	**stack_a, t_node **stack_b)
+{
+	int		min_value;
+	t_node	*current;
+	
+	if (*stack_a == NULL)
+		return ;
+	min_value = (*stack_a)->content;
+	current = *stack_a;
+	current = current->next;
+	if (min_value > current->content)
+	{
+		min_value = current->content;
+		swap_stack(stack_a, 'a');
+	}
+	if (!current->next)
+		return ;
+	push_stack(stack_a, stack_b, 'a');
+	current = current->next;
+	if (min_value > current->content)
+		rotate_stack(stack_a, 'a');
+}
 
 
-void	min_value_sort(t_node **stack_a, t_node **stack_b)
+void	min_value_to_top_sort(t_node **stack_a, t_node **stack_b, int stack_size)
 {
 	int		min_index;
-	int		stack_size;
+	
 	int		rotate_count;
 	
 	if (*stack_a == NULL)
 		return ;
 	if ((*stack_a)->next == NULL)
 	{
-		push_stack(stack_a, stack_b);
+		push_stack(stack_a, stack_b, 'a');
 		return ;
 	}
-	stack_size = node_lst_size(*stack_a);
+	
 	// ft_printf("%d\n", stack_size);
 	min_index = min_node(stack_a);
 	// ft_printf("%d\n", min_index);
@@ -135,7 +176,7 @@ void	min_value_sort(t_node **stack_a, t_node **stack_b)
 		while (rotate_count > 0)
 		{
 			// ft_printf("reverse rotate count %d\n", rotate_count);
-			reverse_rotate(stack_a);
+			reverse_rotate(stack_a, 'a');
 			rotate_count--;
 		}
 		
@@ -145,14 +186,14 @@ void	min_value_sort(t_node **stack_a, t_node **stack_b)
 		while (min_index > 0)
 		{
 			// ft_printf("rotate count %d\n", min_index);
-			rotate_stack(stack_a);
+			rotate_stack(stack_a, 'a');
 			min_index--;
 		}
 		
 	}
 	// ft_printf("rotate min_value to top of stack\n");
 
-	push_stack(stack_a, stack_b);
+	push_stack(stack_a, stack_b, 'a');
 }
 
 int	min_node(t_node **stack_a)

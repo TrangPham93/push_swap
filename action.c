@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:09:00 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/23 13:39:27 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/23 17:49:42 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-void	swap_stack(t_node **lst)
+void	swap_stack(t_node **lst, char	c)
 {
 	// int		len;
 	t_node	*node1;
@@ -34,9 +34,10 @@ void	swap_stack(t_node **lst)
 	node2->next = node1;
 	node2->prev = NULL;
 	*lst = node2;
+	ft_printf("s%c\n", c);
 }
 
-void rotate_stack(t_node **lst)
+void rotate_stack(t_node **lst, char c)
 {
 	t_node	*temp;
 	t_node	*head;
@@ -56,9 +57,10 @@ void rotate_stack(t_node **lst)
 	temp->next = head;
 	head->prev = temp;
 	head->next = NULL;
+	ft_printf("r%c\n", c);
 }
 
-void	reverse_rotate(t_node **lst)
+void	reverse_rotate(t_node **lst, char c)
 {
 	t_node	*temp;
 	t_node	*tail;
@@ -77,9 +79,10 @@ void	reverse_rotate(t_node **lst)
 	tail->prev = NULL;
 	(*lst)->prev = tail;
 	*lst = tail;
+	ft_printf("rr%c\n", c);
 }
 
-void	push_stack(t_node **stack_1, t_node **stack_2)
+void	push_stack(t_node **stack_1, t_node **stack_2, char	c)
 {
 	t_node	*head;
 
@@ -94,4 +97,5 @@ void	push_stack(t_node **stack_1, t_node **stack_2)
 		(*stack_2)->prev = head;
 	head->prev = NULL;
 	*stack_2 = head;
+	ft_printf("p%c\n", c);
 }

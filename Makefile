@@ -6,12 +6,12 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/01/23 12:56:49 by trpham           ###   ########.fr        #
+#    Updated: 2025/01/23 17:11:15 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS = push_swap.c \
 		action.c \
