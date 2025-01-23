@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:09:00 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/23 17:49:42 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/23 23:30:15 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,30 @@ void rotate_stack(t_node **lst, char c)
 	ft_printf("r%c\n", c);
 }
 
+
 void	reverse_rotate(t_node **lst, char c)
 {
-	t_node	*temp;
+	t_node	*second_to_tail;
 	t_node	*tail;
 
 	if (*lst == NULL || (*lst)->next == NULL)
 		return ;
-
-	temp = *lst;
-	while (temp->next != NULL)
-		temp = temp->next;
-		
-	tail = temp;
-	if (temp->prev != NULL)
-		temp->prev->next = NULL;
+	// ft_printf("------------------\n");
+	tail = *lst;
+	while (tail->next != NULL)
+	{
+		second_to_tail = tail;
+		tail = tail->next;
+	}
+	
 	tail->next = *lst;
 	tail->prev = NULL;
 	(*lst)->prev = tail;
+	second_to_tail->next = NULL;
 	*lst = tail;
+	
+	// print_list(*lst);
+	// ft_printf("------------------\n");
 	ft_printf("rr%c\n", c);
 }
 
