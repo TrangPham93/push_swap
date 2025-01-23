@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/17 17:14:44 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/23 12:42:21 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	node_lst_size(t_node *lst)
 
 void	print_list(t_node *lst)
 {
-	if (!lst)
+	if (lst == NULL)
 		return ;
 	while (lst)
 	{
