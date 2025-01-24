@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   facilitator_push_swap.c                            :+:      :+:    :+:   */
+/*   arguments_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:59:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/17 21:47:01 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/24 17:34:45 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_not_duplicate_input(char **arr)
 		{
 			if (ft_strcmp(arr[i], arr[j]) == 0)
 			{
-				ft_printf("Duplicated: %s\n", arr[i]);
+				// ft_printf("Duplicated: %s\n", arr[i]);
 				return (-1);
 			}
 			j++;
@@ -105,20 +105,45 @@ int	ft_valid_input(char **input_arr)
 
 	i = 0;
 	if (ft_not_duplicate_input(input_arr) != 0)
-	{
-		ft_printf("Error: Duplicate input\n");
 		return (-1);
-	}
 	i = 0;
 	while (input_arr[i])
 	{
 		if (ft_is_valid_number(input_arr[i]) != 0 || (ft_atoi_long(input_arr[i])
 				> INT_MAX || ft_atoi_long(input_arr[i]) < INT_MIN))
-		{
-			ft_printf("Error: Not valid integers\n");
 			return (-1);
-		}
 		i++;
 	}
 	return (0);
+}
+char	**ft_handle_input(int argc, char *argv[])
+{
+	int		i;
+	char	**input_arr;
+
+	if (argc == 2)
+	{
+		if (ft_empty_str(argv[1]) == 0)
+			return (NULL);
+		input_arr = ft_split(argv[1], ' ');
+	}
+	else
+	{
+		input_arr = malloc(sizeof (char *) * argc);
+		if (!input_arr)
+			return (NULL);
+		i = 0;
+		while (i < (argc - 1))
+		{
+			input_arr[i] = argv[i + 1];
+			i++;
+		}
+		input_arr[i] = '\0';
+	}
+	return (input_arr);
+}
+void	error(void)
+{
+	write(2, "Error\n", 6);
+	exit (-1);
 }

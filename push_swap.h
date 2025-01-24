@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/23 22:28:31 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/24 17:32:03 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "./libft/includes/ft_printf.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include <errno.h>
 
 typedef struct s_node
 {
@@ -30,6 +31,12 @@ void	swap_stack(t_node **lst, char	c);
 void 	rotate_stack(t_node **lst, char c);
 void	reverse_rotate(t_node **lst, char c);
 void	push_stack(t_node **stack_1, t_node **stack_2, char	c);
+void	reverse_both(t_node **stack_1, t_node	**stack_2);
+void	rotate_both(t_node **stack_1, t_node	**stack_2);
+void	swap_both(t_node **stack_1, t_node	**stack_2);
+
+
+
 
 int			node_lst_size(t_node *lst);
 void		print_list(t_node *lst);
@@ -43,5 +50,12 @@ int			ft_not_duplicate_input(char **arr);
 long long	ft_atoi_long(const char *nptr);
 int			ft_valid_input(char **input_arr);
 char		**ft_handle_input(int argc, char *argv[]);
+void		error(void);
+
+void	sort_stack_of_three(t_node	**stack_a);
+void	sort_stack_of_two(t_node **stack_a);
+void	min_value_to_top_sort(t_node **stack_a, t_node **stack_b);
+void	ft_sort(t_node **stack_a, t_node **stack_b);
+int		min_node(t_node **stack_a);
 
 #endif

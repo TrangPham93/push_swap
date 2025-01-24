@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/01/23 17:11:15 by trpham           ###   ########.fr        #
+#    Updated: 2025/01/24 17:03:49 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRCS = push_swap.c \
 		action.c \
 		doubly_lst.c \
-		facilitator_push_swap.c
+		arguments_parser.c \
+		push_swap_utils.c
 
 OBJS = $(SRCS:%.c=%.o)
 
