@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/24 18:26:48 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/24 19:18:18 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-void	quick_sort(t_node	**stack_a, t_node	**stack_b);
+
 
 int	main(int argc, char *argv[])
 {
@@ -48,11 +48,11 @@ void	ft_sort(t_node **stack_a, t_node **stack_b)
 	stack_size = node_lst_size(*stack_a);
 	if (stack_size == 1)
 		return ;
-	else if (stack_size == 2)
+	else if (stack_size == 2) // need to combine with size of 3
 		sort_stack_of_two(stack_a);
 	else if (stack_size == 3)
 		sort_stack_of_three(stack_a);
-	else
+	else if (stack_size <= 5)
 	{
 		while (stack_size > 3)
 		{
@@ -65,12 +65,15 @@ void	ft_sort(t_node **stack_a, t_node **stack_b)
 		if ((*stack_b)->next == NULL)
 			push_stack(stack_b, stack_a, 'a');
 	}
+	else
+		quick_sort(stack_a, stack_b);
 }
 
-// void	quick_sort(t_node	**stack_a, t_node	**stack_b)
-// {
+void	quick_sort(t_node	**stack_a, t_node	**stack_b)
+{
+	push_stack(stack_a, stack_b, 'b');
 	
-// }
+}
 
 // int	partition()
 // {

@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/01/24 17:03:49 by trpham           ###   ########.fr        #
+#    Updated: 2025/01/24 19:12:51 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS = push_swap.c \
 		action.c \
 		doubly_lst.c \
 		arguments_parser.c \
-		push_swap_utils.c
+		push_swap_utils.c \
+		quick_sort.c
 
 OBJS = $(SRCS:%.c=%.o)
 
