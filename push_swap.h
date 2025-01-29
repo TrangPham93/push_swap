@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/27 11:39:36 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/27 21:51:01 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ typedef struct s_node
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
+
+typedef struct s_stack
+{
+	t_node	*head;
+	t_node	*end;
+	t_node	**arr;
+	int	current_level;
+	int	stack_count;
+}	t_stack;
+
+
 
 void	swap_stack(t_node **lst, char	c);
 void 	rotate_stack(t_node **lst, char c);

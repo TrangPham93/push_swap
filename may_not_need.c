@@ -134,3 +134,65 @@ void execute_moves(t_node **stack_a, t_node **stack_b, int move_a, int move_b)
     push_stack(stack_b, stack_a, 'a');
 }
 
+void	swap_int(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp; 
+}
+int	*stack_dup(t_node	*stack_a, int size)
+{
+	// int		size;
+	int		*stack_a_dup;
+	t_node	*temp;
+	int		i;
+	
+	// size = node_lst_size(stack_a);
+	stack_a_dup = malloc((size) * sizeof(int));
+	if (!stack_a_dup)
+		return (NULL);
+	temp = stack_a;
+	i = 0;
+	while (temp != NULL)
+	{
+		stack_a_dup[i] = temp->content;
+		temp = temp->next;
+		i++;
+	}
+	return (stack_a_dup);
+}
+
+int	partition(int *stack, int low, int high)
+{
+	int	pivot;
+	int	i;
+	int	j;
+	
+	pivot = stack[high];
+	i = low - 1;
+	j = low;
+	while (j < high)
+	{
+		if (stack[j] < pivot)
+		{
+			i++;
+			swap_int(&stack[i], &stack[j]);
+		}
+		j++;
+	}
+	swap_int(&stack[i + 1], &stack[high]);	
+	return (i);
+}
+void	quick_sort(int	*stack, int low, int high)
+{
+	int	pivot_index;
+	
+	if (low < high)
+	{
+		pivot_index = partition(stack, low, high);
+		quick_sort(stack, low, pivot_index - 1);
+		quick_sort(stack, pivot_index + 1, high); 
+	}
+}
