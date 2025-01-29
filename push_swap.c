@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/29 21:57:48 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 23:08:40 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ int	*stack_dup(t_node	*stack_a, int size);
 int	find_mean(t_node *stack, int size);
 void	partition_by_mean(t_node **stack_a, t_node **stack_b, int size);
 int	calculate_moves_to_top(t_node *stack, t_node *node);
-int	find_index(t_node *stack, int nb);
+int	find_index(t_node *stack, t_node *node);
+void	execute_best_move(t_node **stack_a, t_node **stack_b);
+void	move_to_top(t_node **stack, t_node *node, char c);
+t_node	*find_best_friend(t_node *stack_a, int nb);
+void update_move_info(t_node *stack_a, t_node *stack_b);
+t_node	*find_min_node(t_node *stack);
+
+
 
 
 
@@ -67,6 +74,9 @@ void	ft_sort(t_node **stack_a, t_node **stack_b)
 	else
 	{
 		partition_by_mean(stack_a, stack_b, stack_size);
+		sort_stack_of_five(stack_a, stack_b, 5);
+		// print_list(*stack_a);
+		// print_list(*stack_b);
 		while (*stack_b)
 			execute_best_move(stack_a, stack_b);
 	}
@@ -124,8 +134,6 @@ void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
 			push_stack(stack_a, stack_b, 'b');
 		else
 			rotate_stack(stack_a, 'a');
-		// print_list(*stack_a);
-		// print_list(*stack_b);
 			
 		cal_size = node_lst_size(*stack_a);
 		// printf("stack_a size : %d\n", cal_size);
@@ -136,9 +144,9 @@ int	calculate_moves_to_top(t_node *stack, t_node *node)
 {
 	int	index;
 	int	stack_size;
-	int	cost_to_top;
 
 	index = find_index(stack, node);
+	// printf("index %d\n", index);
 	stack_size = node_lst_size(stack);
 	if (index < (stack_size / 2))
 		return (index);
@@ -170,8 +178,13 @@ t_node	*find_best_friend(t_node *stack_a, int nb)
 	best_friend = NULL;
 	while (temp_a)
 	{
-		if (temp_a->content - nb > 0 && temp_a->content < best_friend->content)
-			best_friend = temp_a;
+		if ((temp_a->content) > nb)
+		{
+			if (!best_friend || temp_a->content < best_friend->content)
+				best_friend = temp_a;
+		}
+		// if (!temp_a->next)
+		// 	break;
 		temp_a = temp_a->next;
 	}
 	if (!best_friend) // can not find the best friend, place at the bottom (largest number)
@@ -196,10 +209,15 @@ void update_move_info(t_node *stack_a, t_node *stack_b) // update for stack_b
 	while (temp)
 	{
 		temp->moves_to_top = calculate_moves_to_top(stack_b, temp);
+		// printf("moves_b_to_top %d\n", temp->moves_to_top);
 		temp->index = find_index(stack_b, temp);
+		// printf("moves_b_index %d\n", temp->index);
 		temp->best_friend = find_best_friend(stack_a, temp->content);
+		// printf("best friend %d\n", temp->best_friend->content);
 		temp->friend_moves_to_top = calculate_moves_to_top(stack_a, temp->best_friend);
+		// printf("moves_friend_to_top %d\n", temp->friend_moves_to_top);
 		temp->total_moves = temp->moves_to_top + temp->friend_moves_to_top;
+		// printf("total moves %d\n", temp->total_moves);
 		temp = temp->next;
 	}
 }
@@ -219,22 +237,55 @@ t_node	*find_best_move(t_node *stack_b)
 	}
 	return (best_move);
 }
-void	move_to_top(t_node **stack, t_node *node)
+void	move_to_top(t_node **stack, t_node *node, char c)
 {
-	
+	int	index;
+	int	stack_size;
+	int	move_count;
+
+	index = find_index(*stack, node);
+	stack_size = node_lst_size(*stack);
+	if (index < (stack_size / 2))
+	{
+		while (index--)
+			rotate_stack(stack, c);
+	}
+	else
+	{
+		move_count = stack_size - index;
+		while (move_count--)
+			reverse_rotate(stack, c);		
+	}
 }
 
 void	execute_best_move(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*best_move;
-	int	move_a;
-	int	move_b;
 	
 	update_move_info(*stack_a, *stack_b);
+	// printf("all stack_b is updated \n");
 	best_move = find_best_move(*stack_b);
-	move_to_top(stack_a, best_move->best_friend);	
-	move_to_top(stack_b, best_move);
+	move_to_top(stack_a, best_move->best_friend, 'a');	
+	move_to_top(stack_b, best_move, 'b');
 	push_stack(stack_b, stack_a, 'a');
+	// min_value_to_top_sort(stack_a, stack_b);
+	// min_value = min_node(stack_a);
+	move_to_top(stack_a, find_min_node(*stack_a), 'a');
 }
+t_node	*find_min_node(t_node *stack)
+{
+	t_node *min_node;
+	t_node *temp;
 
+	temp = stack->next;
+	min_node = stack;
+	while (temp)
+	{
+		if (min_node->content > temp->content)
+			min_node = temp;	
+		temp = temp->next;
+	}
+	return (min_node);
+	
+}
 

@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/29 14:40:00 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 22:58:37 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,17 @@ void	sort_stack_of_three(t_node	**stack_a)
 
 void sort_stack_of_five(t_node **stack_a, t_node **stack_b, int stack_size)
 {
+	int	count;
+
+	count = 0;
 	while (stack_size > 3)
 	{
 		min_value_to_top_sort(stack_a, stack_b);
 		stack_size--;
+		count++;
 	}
 	sort_stack_of_three(stack_a);
-	while (*stack_b)	
+	while (count--)
 		push_stack(stack_b, stack_a, 'a');	
 }
 
