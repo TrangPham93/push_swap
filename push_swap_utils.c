@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/24 18:04:30 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 14:40:00 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,19 @@ void	sort_stack_of_three(t_node	**stack_a)
 		reverse_rotate(stack_a, 'a');
 	}
 }
+
+void sort_stack_of_five(t_node **stack_a, t_node **stack_b, int stack_size)
+{
+	while (stack_size > 3)
+	{
+		min_value_to_top_sort(stack_a, stack_b);
+		stack_size--;
+	}
+	sort_stack_of_three(stack_a);
+	while (*stack_b)	
+		push_stack(stack_b, stack_a, 'a');	
+}
+
 int	min_node(t_node **stack_a)
 {
 	int		min_value;
@@ -73,6 +86,7 @@ int	min_node(t_node **stack_a)
 	}
 	return (min_index);
 }
+
 void	min_value_to_top_sort(t_node **stack_a, t_node **stack_b)
 {
 	int		min_index;

@@ -196,3 +196,88 @@ void	quick_sort(int	*stack, int low, int high)
 		quick_sort(stack, pivot_index + 1, high); 
 	}
 }
+
+void quicksort_stack(t_node **stack_a, t_node **stack_b, int size)
+{
+    if (size <= 3)
+    {
+        // Base case: Directly sort the stack if size is 2 or 3
+        if (size == 2)
+		{
+			printf("sort 2 element of stack\n");
+            sort_stack_of_two(stack_a);
+			print_list(*stack_a);
+		}
+        else if (size == 3)
+		{
+			printf("sort 3 element of stack\n");
+            sort_stack_of_three(stack_a);
+			print_list(*stack_a);
+		}
+        return;
+    }
+
+    // Find the pivot (you can use median or random element, here using median)
+    int pivot = find_pivot(*stack_a, size); // Assumes you have a function to get pivot
+
+    // Partition stack_a into stack_a (>= pivot) and stack_b (< pivot)
+    partition_stack(stack_a, stack_b, pivot, size);
+	ft_printf("Stack a (larger than pivot): \n ");
+	print_list(*stack_a);
+	ft_printf("Stack b (smaller than pivot): \n ");
+	print_list(*stack_b);
+
+    // Count the number of elements pushed to stack_b
+    int count_b = size - node_lst_size(*stack_a);  // Number of elements in stack_b
+    int count_a = size - count_b;  // Number of elements in stack_a
+
+    // Recursively sort both parts
+    if (count_a > 0)
+        quicksort_stack(stack_a, stack_b, count_a); // Recursively sort the larger part in stack_a
+    // if (count_b > 0)
+    //     quicksort_stack(stack_b, stack_a, count_b); // Recursively sort the smaller part in stack_b
+
+    // After sorting both parts, push back elements from stack_b to stack_a
+    while (*stack_b)
+    {
+        push_stack(stack_b, stack_a, 'a'); // Push sorted elements back into stack_a
+    }
+}
+
+int	find_pivot(t_node *stack, int size)
+{
+	int	*stack_a_dup;
+	int	median;
+
+	stack_a_dup = stack_dup(stack, size);
+	quick_sort(stack_a_dup, 0, size - 1);
+	// for (int i = 0; i < size; i++)
+	// {
+	// 	ft_printf("%d ", stack_a_dup[i]);
+	// }
+	// ft_printf("\n");
+	median = stack_a_dup[size / 2]; //if divided by 2 return float
+	free(stack_a_dup);
+	return (median);
+
+}
+
+void partition_stack(t_node **stack_a, t_node **stack_b, int pivot, int size)
+{
+    int i = 0;
+
+    while (i < size)
+    {
+        if (*stack_a == NULL)
+            break;
+        if ((*stack_a)->content < pivot)
+        {
+            push_stack(stack_a, stack_b, 'b');  // Push to stack_b if smaller than pivot
+        }
+        else
+        {
+            rotate_stack(stack_a, 'a');        // Rotate stack_a if greater than or equal to pivot
+        }
+        i++;
+    }
+}

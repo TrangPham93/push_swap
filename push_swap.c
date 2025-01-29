@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/28 11:20:21 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 16:21:02 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,8 @@
 #include "./libft/includes/ft_printf.h"
 
 int	*stack_dup(t_node	*stack_a, int size);
-void	quick_sort(int	*stack_dup, int low, int high);
-int	partition(int *stack, int low, int high);
-void	assign_stack_index(t_node **stack_a, int size);
-void execute_moves(t_node **stack_a, t_node **stack_b, int move_a, int move_b);
-int find_optimal_move(int *moves_a, int *moves_b, int size_b);
-int find_position(t_node *stack_a, int index);
-void calculate_moves(t_node *stack_a, t_node *stack_b, int *moves_a, int *moves_b);
-void assign_stack_index(t_node **stack_a, int size);
-int	find_pivot(t_node *stack, int size);
-void	partition_stack(t_node **stack_a, t_node **stack_b, int pivot, int size);
-// void quicksort_stack_a(t_node **stack_a, t_node **stack_b, int size);
-// void quicksort_stack_b(t_node **stack_a, t_node **stack_b, int size);
-void quicksort_stack(t_node **stack_a, t_node **stack_b, int size);
+int	find_mean(t_node *stack, int size);
+void	partition_by_mean(t_node **stack_a, t_node **stack_b, int size);
 
 int	main(int argc, char *argv[])
 {
@@ -71,33 +60,14 @@ void	ft_sort(t_node **stack_a, t_node **stack_b)
 	else if (stack_size == 3)
 		sort_stack_of_three(stack_a);
 	else if (stack_size <= 5)
-	{
-		while (stack_size > 3)
-		{
-			min_value_to_top_sort(stack_a, stack_b);
-			stack_size--;
-		}
-		sort_stack_of_three(stack_a);
-		while (stack_b != NULL && (*stack_b)->next != NULL)
-			push_stack(stack_b, stack_a, 'a');
-		while ((*stack_b)->next == NULL)
-			push_stack(stack_b, stack_a, 'a');
-	}
+		sort_stack_of_five(stack_a, stack_b, stack_size);
 	else
 	{
-		// partition_stack(stack_a, stack_b, find_pivot(*stack_a, stack_size), stack_size);
-		quicksort_stack(stack_a, stack_b, stack_size);
-		
+		partition_by_mean(stack_a, stack_b, stack_size);
 	}
 }
-void	swap_int(int *a, int *b)
-{
-	int	temp;
 
-	temp = *a;
-	*a = *b;
-	*b = temp; 
-}
+
 int	*stack_dup(t_node	*stack_a, int size)
 {
 	int		*stack_a_dup;
@@ -117,120 +87,146 @@ int	*stack_dup(t_node	*stack_a, int size)
 	}
 	return (stack_a_dup);
 }
-int	partition(int *stack, int low, int high)
+
+int	find_mean(t_node *stack, int size)
 {
-	int	pivot;
-	int	i;
-	int	j;
-	
-	pivot = stack[high];
-	i = low - 1;
-	j = low;
-	while (j < high)
+	float	mean;
+	// int		size;
+	int		sum;
+	t_node	*temp;
+
+	sum = 0;
+	// size = node_lst_size(stack);
+	temp = stack;
+	while (temp)
 	{
-		if (stack[j] < pivot)
-		{
-			i++;
-			swap_int(&stack[i], &stack[j]);
-		}
-		j++;
+		sum += temp->content;
+		temp = temp->next;
 	}
-	swap_int(&stack[i + 1], &stack[high]);	
-	return (i + 1);
+	mean = (float)sum / (float)size;
+	// printf("mean : %.2f\n", mean);
+	return ((int)mean);
 }
-void	quick_sort(int	*stack, int low, int high)
+
+void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
 {
-	int	pivot_index;
-	
-	if (low < high)
+	int	mean;
+
+	if (cal_size > 5)
 	{
-		pivot_index = partition(stack, low, high);
-		quick_sort(stack, low, pivot_index - 1);
-		quick_sort(stack, pivot_index + 1, high); 
+		mean = find_mean(*stack_a, cal_size);
+		if ((*stack_a)->content <= mean)
+			push_stack(stack_a, stack_b, 'b');
+		else
+			rotate_stack(stack_a, 'a');
+		// print_list(*stack_a);
+		// print_list(*stack_b);
+			
+		cal_size = node_lst_size(*stack_a);
+		// printf("stack_a size : %d\n", cal_size);
+		partition_by_mean(stack_a, stack_b, cal_size);
 	}
 }
-int	find_pivot(t_node *stack, int size)
+int	cost_to_top(t_node *stack, int	nb)
 {
-	int	*stack_a_dup;
-	int	median;
+	int	index;
+	int	stack_size;
+	int	cost_to_top;
 
-	stack_a_dup = stack_dup(stack, size);
-	quick_sort(stack_a_dup, 0, size - 1);
-	// for (int i = 0; i < size; i++)
-	// {
-	// 	ft_printf("%d ", stack_a_dup[i]);
-	// }
-	// ft_printf("\n");
-	median = stack_a_dup[size / 2]; //if divided by 2 return float
-	free(stack_a_dup);
-	return (median);
-
+	index = find_index(stack, nb);
+	stack_size = node_lst_size(stack);
+	if (index < (stack_size / 2))
+		cost_to_top = index;
+	else
+		cost_to_top = stack_size - index;
+	return (cost_to_top);		
 }
 
-void partition_stack(t_node **stack_a, t_node **stack_b, int pivot, int size)
+int	find_index(t_node *stack, int nb)
 {
-    int i = 0;
+	t_node	*temp;
+	int	index;
 
-    while (i < size)
-    {
-        if (*stack_a == NULL)
-            break;
-        if ((*stack_a)->content < pivot)
-        {
-            push_stack(stack_a, stack_b, 'b');  // Push to stack_b if smaller than pivot
-        }
-        else
-        {
-            rotate_stack(stack_a, 'a');        // Rotate stack_a if greater than or equal to pivot
-        }
-        i++;
-    }
+	index = 0;
+	temp = stack;
+	while (temp->content != nb)
+	{
+		temp = temp->next;
+		index++;
+	}
+	return (index);
 }
 
-void quicksort_stack(t_node **stack_a, t_node **stack_b, int size)
+int	*find_best_friend(t_node **stack_a, t_node **stack_b)
 {
-    if (size <= 3)
-    {
-        // Base case: Directly sort the stack if size is 2 or 3
-        if (size == 2)
+	t_node	*temp_a;
+	t_node	*temp_b;
+	t_node	*best_friend;
+	int	nb;
+	int	lowest;
+	int *best_friend_arr;
+	int	i = 0;
+
+	best_friend_arr = malloc(sizeof(t_node) * node_lst_size(stack_b));
+	if (!best_friend_arr)
+		return (NULL);
+	temp_a = stack_a;
+	while (*temp_b)
+	{
+		nb = (*stack_a)->content;
+		temp_a = stack_a;
+		lowest = INT_MAX;
+		while (temp_a)
 		{
-			printf("sort 2 element of stack\n");
-            sort_stack_of_two(stack_a);
-			print_list(*stack_a);
+			if ((temp_a->content - nb) > 0 && (temp_a->content) < lowest)
+			{
+				best_friend = temp_a;
+				lowest = temp_a->content - nb;
+			}
+			temp_a = temp_a->next;
 		}
-        else if (size == 3)
-		{
-			printf("sort 3 element of stack\n");
-            sort_stack_of_three(stack_a);
-			print_list(*stack_a);
-		}
-        return;
-    }
-
-    // Find the pivot (you can use median or random element, here using median)
-    int pivot = find_pivot(*stack_a, size); // Assumes you have a function to get pivot
-
-    // Partition stack_a into stack_a (>= pivot) and stack_b (< pivot)
-    partition_stack(stack_a, stack_b, pivot, size);
-	ft_printf("Stack a (larger than pivot): \n ");
-	print_list(*stack_a);
-	ft_printf("Stack b (smaller than pivot): \n ");
-	print_list(*stack_b);
-
-    // Count the number of elements pushed to stack_b
-    int count_b = size - node_lst_size(*stack_a);  // Number of elements in stack_b
-    int count_a = size - count_b;  // Number of elements in stack_a
-
-    // Recursively sort both parts
-    if (count_a > 0)
-        quicksort_stack(stack_a, stack_b, count_a); // Recursively sort the larger part in stack_a
-    if (count_b > 0)
-        quicksort_stack(stack_b, stack_a, count_b); // Recursively sort the smaller part in stack_b
-
-    // After sorting both parts, push back elements from stack_b to stack_a
-    while (*stack_b)
-    {
-        push_stack(stack_b, stack_a, 'a'); // Push sorted elements back into stack_a
-    }
+		best_friend_arr[i] = best_friend->content;
+		i++;		
+		temp_b = temp_b->next;
+	}
+	free(best_friend_arr);
+	return (t_node);
 }
+	
+void	dd(t_node **stack_a, t_node **stack_b)
+{
+	int	total_cost = 0;
+	int	min_cost;
+	t_node *temp_b;
+	int cost_a;
+	int	cost_b;
+	int	i = 0;
+	int	*best_friend_arr;
+	int	nb_a;
+	int	nb_b;
+
+	temp_b = stack_b;
+	best_friend_arr = find_best_friend(stack_a, stack_b);
+	min_cost += cost_to_top(stack_a; best_friend_arr[i]);
+	min_cost += cost_to_top(stack_b, (*stack_b)->content);
+	while (temp_b)
+	{
+		cost_a = cost_to_top(stack_a; best_friend_arr[i]);
+		cost_b = cost_to_top(stack_b, (*stack_b)->content);
+		if (cost_a + cost_b < min_cost)
+		{
+			nb_a = *best_friend_arr;
+			nb_b = *temp_b;
+		}
+		best_friend_arr++;
+		temp_b = temp_b->next;
+	}
+	// temp_b = stack_b;
+	
+	
+}
+
+
+
+
 
