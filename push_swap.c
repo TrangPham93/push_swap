@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/29 16:21:02 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 21:57:48 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 int	*stack_dup(t_node	*stack_a, int size);
 int	find_mean(t_node *stack, int size);
 void	partition_by_mean(t_node **stack_a, t_node **stack_b, int size);
+int	calculate_moves_to_top(t_node *stack, t_node *node);
+int	find_index(t_node *stack, int nb);
+
+
 
 int	main(int argc, char *argv[])
 {
@@ -48,7 +52,6 @@ int	main(int argc, char *argv[])
 void	ft_sort(t_node **stack_a, t_node **stack_b)
 {
 	int		stack_size;
-	// int	*stack_a_dup;
 	
 	if (*stack_a == NULL)
 		return ;
@@ -64,6 +67,8 @@ void	ft_sort(t_node **stack_a, t_node **stack_b)
 	else
 	{
 		partition_by_mean(stack_a, stack_b, stack_size);
+		while (*stack_b)
+			execute_best_move(stack_a, stack_b);
 	}
 }
 
@@ -127,29 +132,28 @@ void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
 		partition_by_mean(stack_a, stack_b, cal_size);
 	}
 }
-int	cost_to_top(t_node *stack, int	nb)
+int	calculate_moves_to_top(t_node *stack, t_node *node)
 {
 	int	index;
 	int	stack_size;
 	int	cost_to_top;
 
-	index = find_index(stack, nb);
+	index = find_index(stack, node);
 	stack_size = node_lst_size(stack);
 	if (index < (stack_size / 2))
-		cost_to_top = index;
+		return (index);
 	else
-		cost_to_top = stack_size - index;
-	return (cost_to_top);		
+		return (stack_size - index);
 }
 
-int	find_index(t_node *stack, int nb)
+int	find_index(t_node *stack, t_node *node)
 {
 	t_node	*temp;
 	int	index;
 
 	index = 0;
 	temp = stack;
-	while (temp->content != nb)
+	while (temp->content != node->content)
 	{
 		temp = temp->next;
 		index++;
@@ -157,76 +161,80 @@ int	find_index(t_node *stack, int nb)
 	return (index);
 }
 
-int	*find_best_friend(t_node **stack_a, t_node **stack_b)
+t_node	*find_best_friend(t_node *stack_a, int nb)
 {
 	t_node	*temp_a;
-	t_node	*temp_b;
 	t_node	*best_friend;
-	int	nb;
-	int	lowest;
-	int *best_friend_arr;
-	int	i = 0;
-
-	best_friend_arr = malloc(sizeof(t_node) * node_lst_size(stack_b));
-	if (!best_friend_arr)
-		return (NULL);
+	
 	temp_a = stack_a;
-	while (*temp_b)
+	best_friend = NULL;
+	while (temp_a)
 	{
-		nb = (*stack_a)->content;
-		temp_a = stack_a;
-		lowest = INT_MAX;
+		if (temp_a->content - nb > 0 && temp_a->content < best_friend->content)
+			best_friend = temp_a;
+		temp_a = temp_a->next;
+	}
+	if (!best_friend) // can not find the best friend, place at the bottom (largest number)
+	{
+		best_friend = stack_a;
+		temp_a = stack_a->next;
 		while (temp_a)
 		{
-			if ((temp_a->content - nb) > 0 && (temp_a->content) < lowest)
-			{
+			if (temp_a->content > best_friend->content)
 				best_friend = temp_a;
-				lowest = temp_a->content - nb;
-			}
 			temp_a = temp_a->next;
 		}
-		best_friend_arr[i] = best_friend->content;
-		i++;		
-		temp_b = temp_b->next;
 	}
-	free(best_friend_arr);
-	return (t_node);
+	return (best_friend);
 }
-	
-void	dd(t_node **stack_a, t_node **stack_b)
-{
-	int	total_cost = 0;
-	int	min_cost;
-	t_node *temp_b;
-	int cost_a;
-	int	cost_b;
-	int	i = 0;
-	int	*best_friend_arr;
-	int	nb_a;
-	int	nb_b;
 
-	temp_b = stack_b;
-	best_friend_arr = find_best_friend(stack_a, stack_b);
-	min_cost += cost_to_top(stack_a; best_friend_arr[i]);
-	min_cost += cost_to_top(stack_b, (*stack_b)->content);
+void update_move_info(t_node *stack_a, t_node *stack_b) // update for stack_b
+{
+	t_node	*temp;
+	
+	temp = stack_b;
+	while (temp)
+	{
+		temp->moves_to_top = calculate_moves_to_top(stack_b, temp);
+		temp->index = find_index(stack_b, temp);
+		temp->best_friend = find_best_friend(stack_a, temp->content);
+		temp->friend_moves_to_top = calculate_moves_to_top(stack_a, temp->best_friend);
+		temp->total_moves = temp->moves_to_top + temp->friend_moves_to_top;
+		temp = temp->next;
+	}
+}
+
+t_node	*find_best_move(t_node *stack_b)
+{
+	t_node	*best_move;
+	t_node	*temp_b;
+	
+	best_move = stack_b;
+	temp_b = stack_b->next;
 	while (temp_b)
 	{
-		cost_a = cost_to_top(stack_a; best_friend_arr[i]);
-		cost_b = cost_to_top(stack_b, (*stack_b)->content);
-		if (cost_a + cost_b < min_cost)
-		{
-			nb_a = *best_friend_arr;
-			nb_b = *temp_b;
-		}
-		best_friend_arr++;
+		if (temp_b->total_moves < best_move->total_moves)
+			best_move = temp_b;
 		temp_b = temp_b->next;
 	}
-	// temp_b = stack_b;
-	
+	return (best_move);
+}
+void	move_to_top(t_node **stack, t_node *node)
+{
 	
 }
 
-
-
+void	execute_best_move(t_node **stack_a, t_node **stack_b)
+{
+	t_node	*best_move;
+	int	move_a;
+	int	move_b;
+	
+	update_move_info(*stack_a, *stack_b);
+	best_move = find_best_move(*stack_b);
+	move_to_top(stack_a, best_move->best_friend);	
+	move_to_top(stack_b, best_move);
+	push_stack(stack_b, stack_a, 'a');
+}
 
 

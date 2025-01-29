@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/29 14:28:12 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 20:02:19 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,24 @@
 typedef struct s_node
 {
 	int				content;
-	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
+
+	int				index;
+	int				moves_to_top; // moves required to bring to top
+	struct s_node *best_friend;
+	int	friend_moves_to_top;
+	int	total_moves;
 }	t_node;
 
-typedef struct s_stack
-{
-	t_node	*head;
-	t_node	*end;
-	t_node	**arr;
-	int	current_level;
-	int	stack_count;
-}	t_stack;
+// typedef struct s_stack
+// {
+// 	t_node	*head;
+// 	t_node	*end;
+// 	t_node	**arr;
+// 	int	current_level;
+// 	int	stack_count;
+// }	t_stack;
 
 
 
