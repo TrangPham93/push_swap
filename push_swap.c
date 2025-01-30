@@ -6,15 +6,13 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/24 19:18:18 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/30 17:29:52 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
-
-
 
 int	main(int argc, char *argv[])
 {
@@ -30,8 +28,8 @@ int	main(int argc, char *argv[])
 	if (input_arr == NULL || ft_valid_input(input_arr) == -1)
 		error();
 	stack_a = create_stack(input_arr);
+	free(input_arr);
 	ft_sort(&stack_a, &stack_b);
-	
 	// print_list(stack_a);
 	// print_list(stack_b);	
 	free_list(stack_a);
@@ -53,34 +51,12 @@ void	ft_sort(t_node **stack_a, t_node **stack_b)
 	else if (stack_size == 3)
 		sort_stack_of_three(stack_a);
 	else if (stack_size <= 5)
-	{
-		while (stack_size > 3)
-		{
-			min_value_to_top_sort(stack_a, stack_b);
-			stack_size--;
-		}
-		sort_stack_of_three(stack_a);
-		while (stack_b != NULL && (*stack_b)->next != NULL)
-			push_stack(stack_b, stack_a, 'a');
-		if ((*stack_b)->next == NULL)
-			push_stack(stack_b, stack_a, 'a');
-	}
+		sort_stack_of_five(stack_a, stack_b, stack_size);
 	else
-		quick_sort(stack_a, stack_b);
+	{
+		partition_by_mean(stack_a, stack_b, stack_size);
+		sort_stack_of_five(stack_a, stack_b, 5);
+		while (*stack_b)
+			execute_best_move(stack_a, stack_b);
+	}
 }
-
-void	quick_sort(t_node	**stack_a, t_node	**stack_b)
-{
-	push_stack(stack_a, stack_b, 'b');
-	
-}
-
-// int	partition()
-// {
-	
-// }
-
-// int	find_median(t_node	*stack_a)
-// {
-	
-// }

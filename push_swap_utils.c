@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/24 18:04:30 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/30 17:32:53 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,65 +47,19 @@ void	sort_stack_of_three(t_node	**stack_a)
 		reverse_rotate(stack_a, 'a');
 	}
 }
-int	min_node(t_node **stack_a)
-{
-	int		min_value;
-	int		min_index;
-	int		count;
-	t_node	*temp;
 
-	if (*stack_a == NULL)
-		return (-1);
-		
-	min_value = (*stack_a)->content;
+void sort_stack_of_five(t_node **stack_a, t_node **stack_b, int stack_size)
+{
+	int	count;
+
 	count = 0;
-	min_index = 0;
-	temp = *stack_a;
-	while (temp != NULL)
+	while (stack_size > 3)
 	{
-		if (min_value > temp->content)
-		{
-			min_value = temp->content;
-			min_index = count;
-		}
-		temp = temp->next;
+		min_value_to_top_sort(stack_a, stack_b);
+		stack_size--;
 		count++;
 	}
-	return (min_index);
-}
-void	min_value_to_top_sort(t_node **stack_a, t_node **stack_b)
-{
-	int		min_index;
-	int		stack_size;
-	int		rotate_count;
-	
-	if (*stack_a == NULL)
-		return ;
-	stack_size = node_lst_size(*stack_a);
-	if ((*stack_a)->next == NULL)
-	{
-		push_stack(stack_a, stack_b, 'b');
-		return ;
-	}
-	min_index = min_node(stack_a);
-	if (min_index == -1)
-		return ;
-	if (min_index >= (stack_size / 2))
-	{
-		rotate_count = stack_size - min_index;
-		while (rotate_count > 0)
-		{
-			reverse_rotate(stack_a, 'a');
-			rotate_count--;
-		}
-	}
-	else
-	{
-		while (min_index > 0)
-		{
-			rotate_stack(stack_a, 'a');
-			min_index--;
-		}
-	}
-	push_stack(stack_a, stack_b, 'b');
+	sort_stack_of_three(stack_a);
+	while (count--)
+		push_stack(stack_b, stack_a, 'a');	
 }

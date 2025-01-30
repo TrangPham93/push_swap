@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:59:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/24 17:34:45 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/29 23:31:58 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_not_duplicate_input(char **arr)
 	int	i;
 	int	j;
 
-	if (*arr == NULL)
+	if (arr == NULL || *arr == NULL)
 		return (-1);
 	i = 0;
 	while (arr[i])

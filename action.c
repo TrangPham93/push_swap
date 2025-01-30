@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:09:00 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/24 14:54:12 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/30 14:12:53 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void rotate_stack(t_node **lst, char c)
 	temp->next = head;
 	head->prev = temp;
 	head->next = NULL;
-	ft_printf("r%c\n", c);
+	printf("r%c\n", c);
 }
 
 
