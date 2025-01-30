@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/01/24 19:12:51 by trpham           ###   ########.fr        #
+#    Updated: 2025/01/30 17:40:44 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS = push_swap.c \
-		action.c \
-		doubly_lst.c \
-		arguments_parser.c \
 		push_swap_utils.c \
-		quick_sort.c
+		arguments_parser.c \
+		action.c \
+		node_utils.c \
+		sort_long_stack.c \
+		sort_long_stack_helper.c
 
 OBJS = $(SRCS:%.c=%.o)
 
