@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:31:39 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/30 17:41:29 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 15:46:13 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ int	*stack_dup(t_node	*stack_a, int size)
 	return (stack_a_dup);
 }
 
-int	find_mean(t_node *stack, int size)
+long long	find_mean(t_node *stack, int size)
 {
-	float	mean;
-	// int		size;
-	int		sum;
+	long long	mean;
+	long long		sum;
 	t_node	*temp;
 
 	sum = 0;
@@ -48,8 +47,8 @@ int	find_mean(t_node *stack, int size)
 		sum += temp->content;
 		temp = temp->next;
 	}
-	mean = (float)sum / (float)size;
-	return ((int)mean);
+	mean = sum / size;
+	return (mean);
 }
 
 int	calculate_moves_to_top(t_node *stack, t_node *node)
@@ -58,7 +57,6 @@ int	calculate_moves_to_top(t_node *stack, t_node *node)
 	int	stack_size;
 
 	index = find_index(stack, node);
-	// printf("index %d\n", index);
 	stack_size = node_lst_size(stack);
 	if (index < (stack_size / 2))
 		return (index);

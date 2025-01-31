@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:09:00 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/30 14:12:53 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 14:14:08 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	swap_stack(t_node **lst, char	c)
 	node2->next = node1;
 	node2->prev = NULL;
 	*lst = node2;
-	ft_printf("s%c\n", c);
+	printf("s%c\n", c);
 }
 
 void rotate_stack(t_node **lst, char c)
@@ -68,7 +68,7 @@ void	reverse_rotate(t_node **lst, char c)
 
 	if (*lst == NULL || (*lst)->next == NULL)
 		return ;
-	// ft_printf("------------------\n");
+	// printf("------------------\n");
 	tail = *lst;
 	while (tail->next != NULL)
 	{
@@ -83,8 +83,8 @@ void	reverse_rotate(t_node **lst, char c)
 	*lst = tail;
 	
 	// print_list(*lst);
-	// ft_printf("------------------\n");
-	ft_printf("rr%c\n", c);
+	// printf("------------------\n");
+	printf("rr%c\n", c);
 }
 
 void	push_stack(t_node **stack_1, t_node **stack_2, char	c)
@@ -102,23 +102,23 @@ void	push_stack(t_node **stack_1, t_node **stack_2, char	c)
 		(*stack_2)->prev = head;
 	head->prev = NULL;
 	*stack_2 = head;
-	ft_printf("p%c\n", c);
+	printf("p%c\n", c);
 }
 void	swap_both(t_node **stack_1, t_node	**stack_2)
 {
 	swap_stack(stack_1, 'a');
 	swap_stack(stack_2, 'b');
-	ft_printf("ss\n");
+	printf("ss\n");
 }
 void	rotate_both(t_node **stack_1, t_node	**stack_2)
 {
 	rotate_stack(stack_1, 'a');
 	rotate_stack(stack_2, 'b');
-	ft_printf("rr\n");
+	printf("rr\n");
 }
 void	reverse_both(t_node **stack_1, t_node	**stack_2)
 {
 	reverse_rotate(stack_1, 'a');
 	reverse_rotate(stack_2, 'b');
-	ft_printf("rrr\n");
+	printf("rrr\n");
 }

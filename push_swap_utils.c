@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/30 17:32:53 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 13:25:09 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,39 @@ void	sort_stack_of_three(t_node	**stack_a)
 		reverse_rotate(stack_a, 'a');
 	}
 }
-
-void sort_stack_of_five(t_node **stack_a, t_node **stack_b, int stack_size)
+void sort_stack_of_four(t_node **stack_a, t_node **stack_b)
 {
+	t_node	*min_node;
+
+	if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
+		&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content)
+		return ;
+	min_node = find_min_node(*stack_a);
+	move_to_top(stack_a, min_node, 'a');
+	push_stack(stack_a, stack_b, 'b');
+	// print_list(*stack_a);
+	// print_list(*stack_b);
+	sort_stack_of_three(stack_a);
+	push_stack(stack_b, stack_a, 'a');	
+}
+
+void sort_stack_of_five(t_node **stack_a, t_node **stack_b)
+{
+	t_node	*min_node;
 	int	count;
 
+	if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
+		&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content
+		&& (*stack_a)->next->next->next->content < (*stack_a)->next->next->next->next->content)
+		return ;
 	count = 0;
-	while (stack_size > 3)
+	while (count++ < 2)
 	{
-		min_value_to_top_sort(stack_a, stack_b);
-		stack_size--;
-		count++;
+		min_node = find_min_node(*stack_a);
+		move_to_top(stack_a, min_node, 'a');	
+		push_stack(stack_a, stack_b, 'b');
 	}
 	sort_stack_of_three(stack_a);
 	while (count--)
-		push_stack(stack_b, stack_a, 'a');	
+		push_stack(stack_b, stack_a, 'a');		
 }

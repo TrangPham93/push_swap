@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/30 17:41:34 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 15:46:35 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,19 @@
 
 void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
 {
-	int	mean;
+	long long	mean;
 
 	if (cal_size <= 5)
 		return ;
 	mean = find_mean(*stack_a, cal_size);
-	// printf("mean: %d\n", mean);
 	if (cal_size > 5)
 	{
-		if ((*stack_a)->content <= mean)
+		if ((long long)(*stack_a)->content <= mean)
 			push_stack(stack_a, stack_b, 'b');
 		else
 		{
-			// printf("comapre with mean : %d\n", (*stack_a)->content);
 			rotate_stack(stack_a, 'a');
 		}
-			
 		cal_size = node_lst_size(*stack_a);
 		partition_by_mean(stack_a, stack_b, cal_size);
 	}
