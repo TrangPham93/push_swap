@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 15:38:52 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:12:22 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			ft_is_valid_number(char	*str);
 int			ft_not_duplicate_input(char **arr);
 long long	ft_atoi_long(const char *nptr);
 int			ft_valid_input(char **input_arr);
+int	is_sorted(t_node *stack);
 char		**ft_handle_input(int argc, char *argv[]);
 void		error(void);
 

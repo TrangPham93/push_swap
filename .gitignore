@@ -7,3 +7,4 @@ tester.py
 push_swap_tester/
 *.txt
 *Zone.Identifier
+push_swap_visualizer/

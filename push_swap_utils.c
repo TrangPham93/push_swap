@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 13:25:09 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 16:18:54 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void sort_stack_of_four(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*min_node;
 
-	if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
-		&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content)
-		return ;
+	// if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
+	// 	&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content)
+	// 	return ;
 	min_node = find_min_node(*stack_a);
 	move_to_top(stack_a, min_node, 'a');
 	push_stack(stack_a, stack_b, 'b');
@@ -68,10 +68,10 @@ void sort_stack_of_five(t_node **stack_a, t_node **stack_b)
 	t_node	*min_node;
 	int	count;
 
-	if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
-		&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content
-		&& (*stack_a)->next->next->next->content < (*stack_a)->next->next->next->next->content)
-		return ;
+	// if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
+	// 	&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content
+	// 	&& (*stack_a)->next->next->next->content < (*stack_a)->next->next->next->next->content)
+	// 	return ;
 	count = 0;
 	while (count++ < 2)
 	{
