@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:59:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 16:21:19 by trpham           ###   ########.fr       */
+/*   Updated: 2025/01/31 19:20:48 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,19 @@ int	ft_valid_input(char **input_arr)
 
 	i = 0;
 	if (ft_not_duplicate_input(input_arr) != 0)
+	{
+		ft_free_input_arr(input_arr);
 		return (-1);
+	}
 	i = 0;
 	while (input_arr[i])
 	{
 		if (ft_is_valid_number(input_arr[i]) != 0 || (ft_atoi_long(input_arr[i])
 				> INT_MAX || ft_atoi_long(input_arr[i]) < INT_MIN))
+		{
+			ft_free_input_arr(input_arr);
 			return (-1);
+		}
 		i++;
 	}
 	return (0);
@@ -137,16 +143,17 @@ char	**ft_handle_input(int argc, char *argv[])
 {
 	int		i;
 	char	**input_arr;
+	t_node	*stack;
 
 	if (argc == 2)
 	{
 		if (ft_empty_str(argv[1]) == 0)
 			return (NULL);
-		input_arr = ft_split(argv[1], ' ');
+		input_arr = ft_split(argv[1], ' '); // create stack here
 	}
 	else
 	{
-		input_arr = malloc(sizeof (char *) * argc);
+		input_arr = malloc(sizeof (char *) * argc); // same here
 		if (!input_arr)
 			return (NULL);
 		i = 0;
@@ -163,4 +170,15 @@ void	error(void)
 {
 	write(2, "Error\n", 6);
 	exit (-1);
+}
+void	ft_free_input_arr(char **input_arr)
+{
+	int	count;
+
+	count = 0;
+	while (input_arr[count])
+		count++;
+	while (count--)
+		free(input_arr[count]);
+	free(input_arr);
 }
