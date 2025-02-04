@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:59:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 19:20:48 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 11:54:52 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,26 +134,26 @@ int	is_sorted(t_node *stack)
 		if (temp->content < temp->next->content)
 			temp = temp->next;
 		else
-			return (0);
+			return (-1);
 	}
-	return (-1);
+	return (0);
 }
 
 char	**ft_handle_input(int argc, char *argv[])
 {
 	int		i;
 	char	**input_arr;
-	t_node	*stack;
+	// t_node	*stack;
 
 	if (argc == 2)
 	{
 		if (ft_empty_str(argv[1]) == 0)
 			return (NULL);
-		input_arr = ft_split(argv[1], ' '); // create stack here
+		input_arr = ft_split(argv[1], ' ');
 	}
 	else
 	{
-		input_arr = malloc(sizeof (char *) * argc); // same here
+		input_arr = malloc(sizeof (char *) * argc);
 		if (!input_arr)
 			return (NULL);
 		i = 0;

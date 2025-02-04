@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 13:47:44 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 12:59:13 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-int	node_lst_size(t_node *lst)
+int	stack_size_cal(t_node *lst)
 {
 	int	count;
 
@@ -39,7 +39,7 @@ void	print_list(t_node *lst)
 	printf("\n");
 }
 
-void	free_list(t_node *lst)
+void	free_stack(t_node *lst)
 {
 	t_node	*temp;
 
@@ -194,7 +194,7 @@ void	move_to_top(t_node **stack, t_node *node, char c)
 	int	move_count;
 
 	index = find_index(*stack, node);
-	stack_size = node_lst_size(*stack);
+	stack_size = stack_size_cal(*stack);
 	if (index < (stack_size / 2))
 	{
 		while (index--)

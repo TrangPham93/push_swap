@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:31:39 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 15:46:13 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 12:59:31 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	calculate_moves_to_top(t_node *stack, t_node *node)
 	int	stack_size;
 
 	index = find_index(stack, node);
-	stack_size = node_lst_size(stack);
+	stack_size = stack_size_cal(stack);
 	if (index < (stack_size / 2))
 		return (index);
 	else

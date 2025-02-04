@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 15:46:35 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 12:59:20 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
 		{
 			rotate_stack(stack_a, 'a');
 		}
-		cal_size = node_lst_size(*stack_a);
+		cal_size = stack_size_cal(*stack_a);
 		partition_by_mean(stack_a, stack_b, cal_size);
 	}
 }

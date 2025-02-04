@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 19:04:51 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 13:01:38 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,35 @@ typedef struct s_node
 	int				content;
 	struct s_node	*next;
 	struct s_node	*prev;
-	int				index;
+	// int				index;
 	int				moves_to_top;
-	struct s_node *best_friend;
-	int	friend_moves_to_top;
-	int	total_moves;
+	struct s_node	*best_friend;
+	int				friend_moves_to_top;
+	int				total_moves;
 }	t_node;
 
-void	swap_stack(t_node **lst, char	c);
-void 	rotate_stack(t_node **lst, char c);
-void	reverse_rotate(t_node **lst, char c);
-void	push_stack(t_node **stack_1, t_node **stack_2, char	c);
-void	reverse_both(t_node **stack_1, t_node	**stack_2);
-void	rotate_both(t_node **stack_1, t_node	**stack_2);
-void	swap_both(t_node **stack_1, t_node	**stack_2);
+void		swap_stack(t_node **lst);
+int			sa(t_node **stack_a, char moves[], int i);
+int			rb(t_node **stack_b, char moves[], int i);
+void		rr(t_node **stack_a, t_node **stack_b);
 
-int			node_lst_size(t_node *lst);
+void		rotate_stack(t_node **lst);
+int			rra(t_node **stack_a, char moves[], int i);
+int			rrb(t_node **stack_b, char moves[], int i);
+void		rrr(t_node **stack_a, t_node **stack_b);
+
+void		reverse_rotate(t_node **lst);
+int			rra(t_node **stack_a, char moves[], int i);
+int			rrb(t_node **stack_b, char moves[], int i);
+void		rrr(t_node **stack_a, t_node **stack_b);
+
+void		push_stack(t_node **stack_1, t_node **stack_2);
+int			pa(t_node **stack_a, char moves[], int i);
+int			pb(t_node **stack_b, char moves[], int i);
+
+int			stack_size_cal(t_node *lst);
 void		print_list(t_node *lst);
-void		free_list(t_node *lst);
+void		free_stack(t_node *lst);
 t_node		*ft_doubly_lstnew(int content);
 t_node		*create_stack(char	**arr);
 
@@ -55,12 +66,13 @@ char		**ft_handle_input(int argc, char *argv[]);
 void		ft_free_input_arr(char **input_arr);
 void		error(void);
 
-void	sort_stack_of_three(t_node	**stack_a);
-void	sort_stack_of_two(t_node **stack_a);
-void sort_stack_of_four(t_node **stack_a, t_node **stack_b);
+void		sort_stack_of_three(t_node	**stack_a);
+void		sort_stack_of_two(t_node **stack_a);
+void 		sort_stack_of_four(t_node **stack_a, t_node **stack_b);
 void sort_stack_of_five(t_node **stack_a, t_node **stack_b);
 // void	min_value_to_top_sort(t_node **stack_a, t_node **stack_b);
-void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size);
+void		ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
+				char moves[]);
 // int		min_node(t_node **stack_a);
 
 int	*stack_dup(t_node	*stack_a, int size);
