@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 12:59:20 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:52:38 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
+void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size, char moves[], int i)
 {
 	long long	mean;
 
@@ -24,13 +24,13 @@ void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size)
 	if (cal_size > 5)
 	{
 		if ((long long)(*stack_a)->content <= mean)
-			push_stack(stack_a, stack_b, 'b');
+			pb(stack_a, stack_b, moves, i);
 		else
 		{
-			rotate_stack(stack_a, 'a');
+			ra(stack_a, moves, i);
 		}
 		cal_size = stack_size_cal(*stack_a);
-		partition_by_mean(stack_a, stack_b, cal_size);
+		partition_by_mean(stack_a, stack_b, cal_size, moves, i);
 	}
 }
 
@@ -98,16 +98,16 @@ t_node	*find_best_move(t_node *stack_b)
 	return (best_move);
 }
 
-void	execute_best_move(t_node **stack_a, t_node **stack_b)
+void	execute_best_move(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {
 	t_node	*best_move;
 	
 	update_move_info(*stack_a, *stack_b);
 	best_move = find_best_move(*stack_b);
-	move_to_top(stack_a, best_move->best_friend, 'a');	
-	move_to_top(stack_b, best_move, 'b');
-	push_stack(stack_b, stack_a, 'a');
-	move_to_top(stack_a, find_min_node(*stack_a), 'a');
+	move_to_top_a(stack_a, best_move->best_friend, moves, i);
+	move_to_top_b(stack_b, best_move, moves, i);
+	pa(stack_b, stack_a, moves, i);	
+	move_to_top_a(stack_a, find_min_node(*stack_a), moves, i);
 }
 
 

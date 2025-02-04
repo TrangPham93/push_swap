@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/01/30 17:40:44 by trpham           ###   ########.fr        #
+#    Updated: 2025/02/04 14:41:56 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRCS = push_swap.c \
 		push_swap_utils.c \
 		arguments_parser.c \
-		action.c \
+		swap.c \
+		rotate.c \
+		reverse_rotate.c \
+		push.c \
 		node_utils.c \
 		sort_long_stack.c \
 		sort_long_stack_helper.c

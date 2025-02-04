@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:09:00 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 12:53:06 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:42:24 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ int	sb(t_node **stack_b, char moves[], int i)
 void	ss(t_node **stack_a, t_node **stack_b)
 {
 	swap_stack(stack_a);
-	swap_both(stack_b);
+	swap_stack(stack_b);
 }

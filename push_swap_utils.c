@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/01/31 16:18:54 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 14:41:02 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-void	sort_stack_of_two(t_node **stack_a)
+void	sort_stack_of_two(t_node **stack_a, char moves[], int i)
 {
 	if ((*stack_a)->content > (*stack_a)->next->content)
-		swap_stack(stack_a, 'a');
+		sa(stack_a, moves, i);
 }
 
-void	sort_stack_of_three(t_node	**stack_a)
+void	sort_stack_of_three(t_node	**stack_a, char moves[], int i)
 {
 	int	a;
 	int	b;
@@ -32,54 +32,47 @@ void	sort_stack_of_three(t_node	**stack_a)
 
 	if (a < c && c < b)
 	{
-		reverse_rotate(stack_a, 'a');
-		swap_stack(stack_a, 'a');
+		rra(stack_a, moves, i);
+		sa(stack_a, moves, i);
 	}
 	else if (b < a && a < c)
-		swap_stack(stack_a, 'a');
+		sa(stack_a, moves, i);
 	else if (c < a && a < b)
-		reverse_rotate(stack_a, 'a');
+		rra(stack_a, moves, i);
 	else if (b < c && c < a)
-		rotate_stack(stack_a, 'a');
+		ra(stack_a, moves, i);
 	else if (c < b && b < a)
 	{
-		swap_stack(stack_a, 'a');
-		reverse_rotate(stack_a, 'a');
+		sa(stack_a, moves, i);
+		rra(stack_a, moves, i);
 	}
 }
-void sort_stack_of_four(t_node **stack_a, t_node **stack_b)
+void sort_stack_of_four(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {
 	t_node	*min_node;
 
-	// if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
-	// 	&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content)
-	// 	return ;
 	min_node = find_min_node(*stack_a);
-	move_to_top(stack_a, min_node, 'a');
-	push_stack(stack_a, stack_b, 'b');
+	move_to_top_a(stack_a, min_node, moves, i);
+	pb(stack_a, stack_a, moves, i);
 	// print_list(*stack_a);
 	// print_list(*stack_b);
-	sort_stack_of_three(stack_a);
-	push_stack(stack_b, stack_a, 'a');	
+	sort_stack_of_three(stack_a, moves, i);
+	pa(stack_b, stack_a, moves, i);
 }
 
-void sort_stack_of_five(t_node **stack_a, t_node **stack_b)
+void sort_stack_of_five(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {
 	t_node	*min_node;
 	int	count;
 
-	// if ((*stack_a)->content < (*stack_a)->next->content && (*stack_a)->next->content < (*stack_a)->next->next->content 
-	// 	&& (*stack_a)->next->next->content < (*stack_a)->next->next->next->content
-	// 	&& (*stack_a)->next->next->next->content < (*stack_a)->next->next->next->next->content)
-	// 	return ;
 	count = 0;
 	while (count++ < 2)
 	{
 		min_node = find_min_node(*stack_a);
-		move_to_top(stack_a, min_node, 'a');	
-		push_stack(stack_a, stack_b, 'b');
+		move_to_top_a(stack_a, min_node, moves, i);
+		pb(stack_a, stack_b, moves, i);
 	}
-	sort_stack_of_three(stack_a);
+	sort_stack_of_three(stack_a, moves, i);
 	while (count--)
-		push_stack(stack_b, stack_a, 'a');		
+		pa(stack_b, stack_a, moves, i);
 }
