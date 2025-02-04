@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 15:52:14 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 17:45:32 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	sort_stack_of_two(t_node **stack_a, char moves[], int i)
 {
 	if ((*stack_a)->content > (*stack_a)->next->content)
-		sa(stack_a, moves, i);
+		i = sa(stack_a, moves, i);
 	return (i);	
 }
 
@@ -33,19 +33,19 @@ int	sort_stack_of_three(t_node	**stack_a, char moves[], int i)
 
 	if (a < c && c < b)
 	{
-		rra(stack_a, moves, i);
-		sa(stack_a, moves, i);
+		i = rra(stack_a, moves, i);
+		i = sa(stack_a, moves, i);
 	}
 	else if (b < a && a < c)
-		sa(stack_a, moves, i);
+		i = sa(stack_a, moves, i);
 	else if (c < a && a < b)
-		rra(stack_a, moves, i);
+		i = rra(stack_a, moves, i);
 	else if (b < c && c < a)
-		ra(stack_a, moves, i);
+		i = ra(stack_a, moves, i);
 	else if (c < b && b < a)
 	{
-		sa(stack_a, moves, i);
-		rra(stack_a, moves, i);
+		i = sa(stack_a, moves, i);
+		i = rra(stack_a, moves, i);
 	}
 	return (i);
 }
@@ -54,10 +54,11 @@ int	sort_stack_of_four(t_node **stack_a, t_node **stack_b, char moves[], int i)
 	t_node	*min_node;
 
 	min_node = find_min_node(*stack_a);
-	move_to_top_a(stack_a, min_node, moves, i);
-	pb(stack_a, stack_b, moves, i);
-	sort_stack_of_three(stack_a, moves, i);
-	pa(stack_b, stack_a, moves, i);
+	// printf("min_node value %d\n", min_node->content);
+	i = move_to_top_a(stack_a, min_node, moves, i);
+	i = pb(stack_a, stack_b, moves, i);
+	i = sort_stack_of_three(stack_a, moves, i);
+	i = pa(stack_b, stack_a, moves, i);
 	return (i);
 }
 
@@ -70,11 +71,11 @@ int	sort_stack_of_five(t_node **stack_a, t_node **stack_b, char moves[], int i)
 	while (count++ < 2)
 	{
 		min_node = find_min_node(*stack_a);
-		move_to_top_a(stack_a, min_node, moves, i);
-		pb(stack_a, stack_b, moves, i);
+		i = move_to_top_a(stack_a, min_node, moves, i);
+		i = pb(stack_a, stack_b, moves, i);
 	}
-	sort_stack_of_three(stack_a, moves, i);
+	i = sort_stack_of_three(stack_a, moves, i);
 	while (count--)
-		pa(stack_b, stack_a, moves, i);
+		i = pa(stack_b, stack_a, moves, i);
 	return (i);
 }

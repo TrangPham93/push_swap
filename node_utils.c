@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 15:52:36 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 17:45:25 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,18 @@ int move_to_top_a(t_node **stack_a, t_node *node, char moves[], int i)
 	int	move_count;
 
 	index = find_index(*stack_a, node);
+	// printf("min node index %d\n", index);
 	stack_size = stack_size_cal(*stack_a);
 	if (index < (stack_size / 2))
 	{
 		while (index--)
-			ra(stack_a, moves, i);
+			i = ra(stack_a, moves, i);
 	}
 	else
 	{
 		move_count = stack_size - index;
 		while (move_count--)
-			rra(stack_a, moves, i);
+			i = rra(stack_a, moves, i);
 	}
 	return (i);
 }

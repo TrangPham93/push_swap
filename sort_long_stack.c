@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 16:04:39 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 18:13:33 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ int	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
 	// if (cal_size <= 5)
 	// 	break ;
 	mean = find_mean(*stack_a, cal_size);
+	printf("mean of stack a %lld\n", mean);
 	if (cal_size > 5)
 	{
 		if ((long long)(*stack_a)->content <= mean)
-			pb(stack_a, stack_b, moves, i);
+			i = pb(stack_a, stack_b, moves, i);
 		else
 		{
-			ra(stack_a, moves, i);
+			i = ra(stack_a, moves, i);
 		}
 		cal_size = stack_size_cal(*stack_a);
 		i = partition_by_mean(stack_a, stack_b, cal_size, moves, i);
@@ -65,6 +66,7 @@ t_node	*find_best_friend(t_node *stack_a, int nb)
 			temp_a = temp_a->next;
 		}
 	}
+	printf("best friend: %d\n", best_friend->content);
 	return (best_friend);
 }
 
@@ -76,10 +78,15 @@ void update_move_info(t_node *stack_a, t_node *stack_b) // update for stack_b
 	while (temp)
 	{
 		temp->moves_to_top = calculate_moves_to_top(stack_b, temp);
+		printf("move to top %d\n", temp->moves_to_top);
 		temp->index = find_index(stack_b, temp);
+		printf("index %d\n", temp->index);
 		temp->best_friend = find_best_friend(stack_a, temp->content);
+		printf("best friend %d\n", temp->best_friend->content);
 		temp->friend_moves_to_top = calculate_moves_to_top(stack_a, temp->best_friend);
+		printf("friend move to top %d\n", temp->friend_moves_to_top);
 		temp->total_moves = temp->moves_to_top + temp->friend_moves_to_top;
+		printf("total moves %d\n", temp->total_moves);
 		temp = temp->next;
 	}
 }
@@ -107,10 +114,10 @@ int	execute_best_move(t_node **stack_a, t_node **stack_b,
 	
 	update_move_info(*stack_a, *stack_b);
 	best_move = find_best_move(*stack_b);
-	move_to_top_a(stack_a, best_move->best_friend, moves, i);
-	move_to_top_b(stack_b, best_move, moves, i);
-	pa(stack_b, stack_a, moves, i);	
-	move_to_top_a(stack_a, find_min_node(*stack_a), moves, i);
+	i = move_to_top_a(stack_a, best_move->best_friend, moves, i);
+	i = move_to_top_b(stack_b, best_move, moves, i);
+	i = pa(stack_b, stack_a, moves, i);	
+	// i = move_to_top_a(stack_a, find_min_node(*stack_a), moves, i);
 	return (i);
 }
 
