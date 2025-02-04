@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 14:48:37 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 15:52:36 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_node	*find_min_node(t_node *stack)
 	return (min_node);
 }
 
-void	move_to_top_a(t_node **stack_a, t_node *node, char moves[], int i)
+int move_to_top_a(t_node **stack_a, t_node *node, char moves[], int i)
 {
 	int	index;
 	int	stack_size;
@@ -142,8 +142,9 @@ void	move_to_top_a(t_node **stack_a, t_node *node, char moves[], int i)
 		while (move_count--)
 			rra(stack_a, moves, i);
 	}
+	return (i);
 }
-void	move_to_top_b(t_node **stack_b, t_node *node, char moves[], int i)
+int	move_to_top_b(t_node **stack_b, t_node *node, char moves[], int i)
 {
 	int	index;
 	int	stack_size;
@@ -154,12 +155,13 @@ void	move_to_top_b(t_node **stack_b, t_node *node, char moves[], int i)
 	if (index < (stack_size / 2))
 	{
 		while (index--)
-			ra(stack_b, moves, i);
+			rb(stack_b, moves, i);
 	}
 	else
 	{
 		move_count = stack_size - index;
 		while (move_count--)
-			rra(stack_b, moves, i);
+			rrb(stack_b, moves, i);
 	}
+	return (i);
 }

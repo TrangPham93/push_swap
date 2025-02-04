@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 14:52:38 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 16:04:39 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size, char moves[], int i)
+int	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
+			char moves[], int i)
 {
 	long long	mean;
 
-	if (cal_size <= 5)
-		return ;
+	// if (cal_size <= 5)
+	// 	break ;
 	mean = find_mean(*stack_a, cal_size);
 	if (cal_size > 5)
 	{
@@ -30,8 +31,9 @@ void	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size, char mo
 			ra(stack_a, moves, i);
 		}
 		cal_size = stack_size_cal(*stack_a);
-		partition_by_mean(stack_a, stack_b, cal_size, moves, i);
+		i = partition_by_mean(stack_a, stack_b, cal_size, moves, i);
 	}
+	return (i);
 }
 
 t_node	*find_best_friend(t_node *stack_a, int nb)
@@ -98,7 +100,8 @@ t_node	*find_best_move(t_node *stack_b)
 	return (best_move);
 }
 
-void	execute_best_move(t_node **stack_a, t_node **stack_b, char moves[], int i)
+int	execute_best_move(t_node **stack_a, t_node **stack_b,
+			char moves[], int i)
 {
 	t_node	*best_move;
 	
@@ -108,6 +111,7 @@ void	execute_best_move(t_node **stack_a, t_node **stack_b, char moves[], int i)
 	move_to_top_b(stack_b, best_move, moves, i);
 	pa(stack_b, stack_a, moves, i);	
 	move_to_top_a(stack_a, find_min_node(*stack_a), moves, i);
+	return (i);
 }
 
 

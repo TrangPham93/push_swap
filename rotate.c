@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:37:45 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 14:42:58 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/04 15:00:40 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ra(t_node **stack_a, char moves[], int i)
 int	rb(t_node **stack_b, char moves[], int i)
 {
 	rotate_stack(stack_b);
-	moves[i] = ')';
+	moves[i] = '4';
 	i++;
 	return (i);
 }
