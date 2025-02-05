@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 17:58:25 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 13:00:22 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
 int			execute_best_move(t_node **stack_a, t_node **stack_b, char moves[],
 				int i);
 int			optimized_move(char	moves[], int i);
-int			normal_move(char	moves[], int i);
+void		normal_move(char	moves[], int i);
 
 int			find_index(t_node *stack, t_node *node);
 t_node		*find_min_node(t_node *stack);

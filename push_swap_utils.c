@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 17:45:32 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:18:40 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,18 @@ int	sort_stack_of_five(t_node **stack_a, t_node **stack_b, char moves[], int i)
 	int	count;
 
 	count = 0;
-	while (count++ < 2)
+	while (count < 2)
 	{
 		min_node = find_min_node(*stack_a);
 		i = move_to_top_a(stack_a, min_node, moves, i);
 		i = pb(stack_a, stack_b, moves, i);
+		count++;
 	}
 	i = sort_stack_of_three(stack_a, moves, i);
-	while (count--)
+	while (count)
+	{
 		i = pa(stack_b, stack_a, moves, i);
+		count--;
+	}
 	return (i);
 }

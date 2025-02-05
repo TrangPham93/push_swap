@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 18:14:52 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 13:56:41 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ int	main(int argc, char *argv[])
 		// printf("size of stack_a %d\n", stack_size);
 		// print_list(stack_a);
 		// print_list(stack_b);
+		ft_memset(moves, 0, 999999);
 		ft_sort(&stack_a, &stack_b, stack_size, moves);
 	}
 	print_list(stack_a);
-	print_list(stack_b);
+	// print_list(stack_b);
 	
 	free_stack(stack_a);
 	free_stack(stack_b);
@@ -76,14 +77,26 @@ void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 	else
 	{
 		i = partition_by_mean(stack_a, stack_b, stack_size, moves, i);
+		// print_list(*stack_a);
 		i = sort_stack_of_five(stack_a, stack_b, moves, i);
-		print_list(stack_a);
+		// print_list(*stack_a);
 		while (*stack_b)
+		{
 			i = execute_best_move(stack_a, stack_b, moves, i);
+			// print_list(*stack_a);
+		}
+		i = move_to_top_a(stack_a, find_min_node(*stack_a), moves, i);
 	}
-	printf("value of i: %d\n", i);
-	// for (int j = 0; moves[j]!='\0'; j++)
-	// 	printf("value of moves %c\n", moves[j]);
+	// printf("value of i: %d\n", i);
+	// int	j = 0;
+	// while (moves[j] != '\0')
+	// {
+	// 	printf("%c ", moves[j]);
+	// 	j++;	
+	// }
+	
+	// printf("\n");
+	// printf("number of element in moves: %d\n", j-1);
 	print_moves(moves, i);
 }
 
@@ -93,11 +106,13 @@ void	print_moves(char moves[], int i)
 	int	temp;
 
 	j = 0;
-	while (j <= i)
+	temp = 0;
+	while (j < i && moves[j] != '\0')
 	{
 		temp = j;
 		j = optimized_move(moves, j);
-		if (j - temp != 1)
+		// printf("temp value %d & j value %d\n:", temp, j);
+		if (j == temp)
 		{
 			// printf("normal moves \n");
 			normal_move(moves, j);
@@ -108,6 +123,8 @@ void	print_moves(char moves[], int i)
 
 int	optimized_move(char	moves[], int i)
 {
+	if (moves[i] == '\0' || moves[i + 1] == '\0')
+		return (i);
 	if ((moves[i] == '1' && moves[i + 1] == '2')
 		|| (moves[i] == '2' && moves[i + 1] == '1'))
 	{
@@ -129,7 +146,7 @@ int	optimized_move(char	moves[], int i)
 	return (i);
 }
 
-int	normal_move(char moves[], int i)
+void	normal_move(char moves[], int i)
 {
 	if (moves[i] == '1')
 		write(1, "sa\n", 3);
@@ -147,5 +164,4 @@ int	normal_move(char moves[], int i)
 		write(1, "pb\n", 3);
 	if (moves[i] == '8')
 		write(1, "pa\n", 3);
-	return (i);
 }
