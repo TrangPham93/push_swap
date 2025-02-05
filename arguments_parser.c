@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:59:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 11:54:52 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 14:38:57 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ char	**ft_handle_input(int argc, char *argv[])
 			input_arr[i] = argv[i + 1];
 			i++;
 		}
-		input_arr[i] = '\0';
+		// input_arr[i] = 0;
 	}
 	return (input_arr);
 }

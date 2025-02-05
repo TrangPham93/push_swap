@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 13:56:41 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:39:46 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int argc, char *argv[])
 			error();
 		}
 		stack_a = create_stack(input_arr);
+		// printf("initial input :\n");
+		// print_list(stack_a);
 		if (argc == 2)
 			ft_free_input_arr(input_arr);
 		else
@@ -48,7 +50,7 @@ int	main(int argc, char *argv[])
 		ft_memset(moves, 0, 999999);
 		ft_sort(&stack_a, &stack_b, stack_size, moves);
 	}
-	print_list(stack_a);
+	// print_list(stack_a);
 	// print_list(stack_b);
 	
 	free_stack(stack_a);
@@ -77,9 +79,10 @@ void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 	else
 	{
 		i = partition_by_mean(stack_a, stack_b, stack_size, moves, i);
+		// printf("After partitioning:\n");
 		// print_list(*stack_a);
+		// print_list(*stack_b);
 		i = sort_stack_of_five(stack_a, stack_b, moves, i);
-		// print_list(*stack_a);
 		while (*stack_b)
 		{
 			i = execute_best_move(stack_a, stack_b, moves, i);
@@ -107,7 +110,7 @@ void	print_moves(char moves[], int i)
 
 	j = 0;
 	temp = 0;
-	while (j < i && moves[j] != '\0')
+	while (j <= i && moves[j] != '\0')
 	{
 		temp = j;
 		j = optimized_move(moves, j);
@@ -155,7 +158,7 @@ void	normal_move(char moves[], int i)
 	if (moves[i] == '3')
 		write(1, "ra\n", 3);
 	if (moves[i] == '4')
-		write(1, "ra\n", 3);
+		write(1, "rb\n", 3);
 	if (moves[i] == '5')
 		write(1, "rra\n", 4);
 	if (moves[i] == '6')

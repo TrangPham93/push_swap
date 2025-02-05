@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 17:45:25 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:40:52 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int move_to_top_a(t_node **stack_a, t_node *node, char moves[], int i)
 	index = find_index(*stack_a, node);
 	// printf("min node index %d\n", index);
 	stack_size = stack_size_cal(*stack_a);
-	if (index < (stack_size / 2))
+	if (index <= (stack_size / 2))
 	{
 		while (index--)
 			i = ra(stack_a, moves, i);
@@ -153,16 +153,24 @@ int	move_to_top_b(t_node **stack_b, t_node *node, char moves[], int i)
 
 	index = find_index(*stack_b, node);
 	stack_size = stack_size_cal(*stack_b);
-	if (index < (stack_size / 2))
+	// printf("best move  %d, its index %d & stack size %d\n", node->content, index, stack_size);
+	if (index <= (stack_size / 2))
 	{
 		while (index--)
-			rb(stack_b, moves, i);
+		{
+			// printf("rotate stack b\n");
+			i = rb(stack_b, moves, i);
+			// printf("i that need to be roated in b %d\n", i);
+		}
 	}
 	else
 	{
 		move_count = stack_size - index;
 		while (move_count--)
-			rrb(stack_b, moves, i);
+		{
+			// printf("reverse rotate stack b\n");
+			i = rrb(stack_b, moves, i);
+		}
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 12:29:38 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:40:20 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,16 @@ void update_move_info(t_node *stack_a, t_node *stack_b) // update for stack_b
 	temp = stack_b;
 	while (temp)
 	{
-		temp->moves_to_top = calculate_moves_to_top(stack_b, temp);
-		// printf("move to top %d\n", temp->moves_to_top);
 		temp->index = find_index(stack_b, temp);
-		// printf("index %d\n", temp->index);
+		temp->moves_to_top = calculate_moves_to_top(stack_b, temp);
 		temp->best_friend = find_best_friend(stack_a, temp->content);
-		// printf("best friend %d\n", temp->best_friend->content);
 		temp->friend_moves_to_top = calculate_moves_to_top(stack_a, temp->best_friend);
-		// printf("friend move to top %d\n", temp->friend_moves_to_top);
 		temp->total_moves = temp->moves_to_top + temp->friend_moves_to_top;
-		// printf("total moves %d\n", temp->total_moves);
+		// printf("for %d, index is %d, move to top %d, best friend %d, friend move to top %d, total moves %d\n", \
+		// 	temp->content, temp->index,temp->moves_to_top, \
+		// 	temp->best_friend->content, temp->friend_moves_to_top, temp->total_moves);
 		temp = temp->next;
+		// printf("next node %d\n", temp->content);
 	}
 }
 
@@ -112,13 +111,19 @@ int	execute_best_move(t_node **stack_a, t_node **stack_b,
 {
 	t_node	*best_move;
 	
-	update_move_info(*stack_a, *stack_b);
-	best_move = find_best_move(*stack_b);
-	i = move_to_top_a(stack_a, best_move->best_friend, moves, i);
-	i = move_to_top_b(stack_b, best_move, moves, i);
-	i = pa(stack_b, stack_a, moves, i);
+	// printf("execute the best move \n");
 	// print_list(*stack_a);
 	// print_list(*stack_b);
+	// printf("Updating stack_b value:\n");
+	update_move_info(*stack_a, *stack_b);
+	best_move = find_best_move(*stack_b);
+	// printf("best move %d with total move %d \n", best_move->content, best_move->total_moves);
+	i = move_to_top_a(stack_a, best_move->best_friend, moves, i);
+	// print_list(*stack_a);
+	i = move_to_top_b(stack_b, best_move, moves, i);
+	// print_list(*stack_b);
+	i = pa(stack_b, stack_a, moves, i);
+	
 	// i = move_to_top_a(stack_a, find_min_node(*stack_a), moves, i); // =?
 	// print_list(*stack_a);
 	// print_list(*stack_b);
