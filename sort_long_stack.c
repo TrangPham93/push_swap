@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 19:40:20 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:53:52 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void update_move_info(t_node *stack_a, t_node *stack_b) // update for stack_b
 		temp->best_friend = find_best_friend(stack_a, temp->content);
 		temp->friend_moves_to_top = calculate_moves_to_top(stack_a, temp->best_friend);
 		temp->total_moves = temp->moves_to_top + temp->friend_moves_to_top;
-		// printf("for %d, index is %d, move to top %d, best friend %d, friend move to top %d, total moves %d\n", \
-		// 	temp->content, temp->index,temp->moves_to_top, \
+		// printf("for %d, index is %d, move to top %d, best friend %d, friend move to top %d, total moves %d\n", 
+		// 	temp->content, temp->index,temp->moves_to_top, 
 		// 	temp->best_friend->content, temp->friend_moves_to_top, temp->total_moves);
 		temp = temp->next;
 		// printf("next node %d\n", temp->content);
