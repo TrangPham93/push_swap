@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:46:31 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 14:53:29 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char *argv[])
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
-	char	**input_arr;
 	int		stack_size;
 	char	moves[999999];
 
@@ -26,23 +25,15 @@ int	main(int argc, char *argv[])
 	stack_b = NULL;
 	if (argc > 1)
 	{
-		input_arr = ft_handle_input(argc, argv);
-		if (input_arr == NULL || ft_valid_input(input_arr) == -1)
-		{
-			error();
-		}
-		stack_a = create_stack(input_arr);
-		// printf("initial input :\n");
-		// print_list(stack_a);
-		if (argc == 2)
-			ft_free_input_arr(input_arr);
-		else
-			free(input_arr);
-		if (stack_a == NULL)
+		stack_a = ft_handle_input(argc, argv);
+		if (!stack_a)
 		{
 			free_stack(stack_a);
 			return (0);
 		}
+		printf("initial input :\n");
+		print_list(stack_a);
+		
 		stack_size = stack_size_cal(stack_a);
 		ft_memset(moves, 0, 999999);
 		ft_sort(&stack_a, &stack_b, stack_size, moves);
