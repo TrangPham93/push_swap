@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:59:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 15:06:39 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 16:40:59 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	ft_empty_str(char *str)
 	int	i;
 
 	i = 0;
-	if (!str[i])
+	if (!str)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] != 32)
+		if (str[i] != ' ' && str[i] != '\t')
 			return (-1);
 		i++;
 	}
@@ -68,7 +68,6 @@ int	is_sorted(t_node *stack)
 
 t_node	*ft_handle_input(int argc, char *argv[])
 {
-	int		i;
 	char	**input_arr;
 	t_node	*stack;
 
@@ -80,35 +79,14 @@ t_node	*ft_handle_input(int argc, char *argv[])
 		if (!input_arr)
 		{
 			ft_free_input_arr(input_arr);
-			error(); // if ft_split fails
+			error();
 		}
 	}
 	else
-	{
-		input_arr = malloc(sizeof (char *) * argc);
-		if (!input_arr)
-			return (NULL);
-		i = 0;
-		while (i < (argc - 1))
-		{
-			input_arr[i] = ft_strdup(argv[i + 1]);
-			 // duplicate the str, not copy the pointer in case the str is modified
-			if (!input_arr[i])
-			{
-				while (i >= 0)
-				{
-					free(input_arr[i]);
-					i--;
-				}
-			free(input_arr);
-			error();
-			}
-			i++;
-		}
-		input_arr[i] = NULL;
-	}
+		input_arr = handle_multiple_input(argc, argv);
 	if (ft_valid_input(input_arr) == -1)
 	{
+		printf("failing valid input check \n");
 		error();
 	}
 	stack = create_stack(input_arr);
@@ -120,4 +98,80 @@ void	error(void)
 {
 	write(2, "Error\n", 6);
 	exit (-1);
+}
+char	**handle_multiple_input(int	argc, char *argv[])
+{
+	int	count;
+	// int	i;
+	char	**input_arr;
+
+	// i = 0;
+	count = count_multiple_input(argc, argv);
+	input_arr = malloc(sizeof (char *) * (count + 1));
+	if (!input_arr)
+		error ();
+	convert_multiple_input_arr(argc, argv, input_arr);
+	return (input_arr);
+}
+void	convert_multiple_input_arr(int argc, char *argv[], char **input_arr)
+{
+	int	i;
+	int	j;
+	int	k;
+	char	**str;
+	
+	i = 1;
+	j = 0;
+	while (i < argc)
+	{
+		if ( !argv[i] || ft_empty_str(argv[i]) == 0)
+			error();
+		str = ft_split(argv[i], ' ');
+		if (!str)
+		{
+			ft_free_input_arr(str);
+			error();
+		}
+		k = 0;
+		while (str[k])
+		{
+			input_arr[j] = ft_strdup(str[k]);
+			if (!input_arr[j])
+				ft_free_input_arr(input_arr);
+			k++;
+			j++;
+		}
+		i++;
+		ft_free_input_arr(str);
+	}
+	input_arr[j] = NULL;
+}
+
+int	count_multiple_input(int argc, char *argv[])
+{
+	int	i;
+	int	j;
+	int	count;
+	char	**input_arr;
+
+	i = 0;
+	count = 0;
+	while (i < argc)
+	{
+		if (!argv[i] || ft_empty_str(argv[i + 1]) == 0)
+			error();
+		input_arr = ft_split(argv[i + 1], ' ');
+		if (!input_arr)
+		{
+			ft_free_input_arr(input_arr);
+			error();
+		}
+		j = 0;
+		while (input_arr[j])
+			j++;
+		count += j;
+		ft_free_input_arr(input_arr);
+		i++;
+	}
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 12:58:03 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 15:58:58 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int			ft_valid_input(char **input_arr);
 int			is_sorted(t_node *stack);
 t_node		*ft_handle_input(int argc, char *argv[]);
 void		ft_free_input_arr(char **input_arr);
+char		**handle_multiple_input(int	argc, char *argv[]);
+int	count_multiple_input(int argc, char *argv[]);
+void	convert_multiple_input_arr(int argc, char *argv[], char **input_arr);
+
+
 void		error(void);
 
 int			sort_stack_of_two(t_node **stack_a, char moves[], int i);
