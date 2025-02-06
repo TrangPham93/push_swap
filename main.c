@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 14:53:29 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 16:56:14 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char *argv[])
 		}
 		printf("initial input :\n");
 		print_list(stack_a);
-		
 		stack_size = stack_size_cal(stack_a);
 		ft_memset(moves, 0, 999999);
 		ft_sort(&stack_a, &stack_b, stack_size, moves);
@@ -74,64 +73,9 @@ void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 	print_moves(moves, i);
 }
 
-void	print_moves(char moves[], int i)
-{
-	int	j;
-	int	temp;
 
-	j = 0;
-	temp = 0;
-	while (j <= i && moves[j] != '\0')
-	{
-		temp = j;
-		j = optimized_move(moves, j);
-		if (j == temp)
-			normal_move(moves, j);
-		j++;
-	}
-}
-
-int	optimized_move(char moves[], int i)
+void	error(void)
 {
-	if (moves[i] == '\0' || moves[i + 1] == '\0')
-		return (i);
-	if ((moves[i] == '1' && moves[i + 1] == '2')
-		|| (moves[i] == '2' && moves[i + 1] == '1'))
-	{
-		write(1, "ss\n", 3);
-		i++;
-	}
-	else if ((moves[i] == '3' && moves[i + 1] == '4')
-		|| (moves[i] == '4' && moves[i + 1] == '3'))
-	{
-		write(1, "rr\n", 3);
-		i++;
-	}
-	else if ((moves[i] == '5' && moves[i + 1] == '6')
-		|| (moves[i] == '6' && moves[i + 1] == '5'))
-	{
-		write(1, "rrr\n", 4);
-		i++;
-	}
-	return (i);
-}
-
-void	normal_move(char moves[], int i)
-{
-	if (moves[i] == '1')
-		write(1, "sa\n", 3);
-	if (moves[i] == '2')
-		write(1, "sb\n", 3);
-	if (moves[i] == '3')
-		write(1, "ra\n", 3);
-	if (moves[i] == '4')
-		write(1, "rb\n", 3);
-	if (moves[i] == '5')
-		write(1, "rra\n", 4);
-	if (moves[i] == '6')
-		write(1, "rrb\n", 4);
-	if (moves[i] == '7')
-		write(1, "pb\n", 3);
-	if (moves[i] == '8')
-		write(1, "pa\n", 3);
+	write(2, "Error\n", 6);
+	exit (-1);
 }

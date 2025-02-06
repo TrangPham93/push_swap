@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments_parser_utils.c                           :+:      :+:    :+:   */
+/*   arguments_parser_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:50:11 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 14:53:45 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:10:07 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
+
+int	ft_empty_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
 
 void	ft_free_input_arr(char **input_arr)
 {
@@ -40,10 +56,7 @@ int	ft_not_duplicate_input(char **arr)
 		while (arr[j])
 		{
 			if (ft_strcmp(arr[i], arr[j]) == 0)
-			{
-				// ft_printf("Duplicated: %s\n", arr[i]);
 				return (-1);
-			}
 			j++;
 		}
 		i++;

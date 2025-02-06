@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/02/06 12:08:23 by trpham           ###   ########.fr        #
+#    Updated: 2025/02/06 16:54:48 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRCS = main.c \
 		push_swap_utils.c \
 		arguments_parser.c \
-		arguments_parser_utils.c \
+		arguments_parser_1.c \
+		arguments_parser_2.c \
 		swap.c \
 		rotate.c \
 		reverse_rotate.c \
@@ -24,7 +25,8 @@ SRCS = main.c \
 		node_utils.c \
 		node_utils_2.c \
 		sort_long_stack.c \
-		sort_long_stack_helper.c
+		sort_long_stack_helper.c \
+		optimize_move.c
 
 OBJS = $(SRCS:%.c=%.o)
 
