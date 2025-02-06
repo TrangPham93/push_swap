@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:50:11 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:10:07 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 18:22:35 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_not_duplicate_input(char **arr)
 		j = i + 1;
 		while (arr[j])
 		{
-			if (ft_strcmp(arr[i], arr[j]) == 0)
+			if (ft_atoi_long(arr[i]) == ft_atoi_long(arr[j]))
 				return (-1);
 			j++;
 		}
@@ -94,12 +94,6 @@ int	ft_valid_input(char **input_arr)
 	int	i;
 
 	i = 0;
-	if (ft_not_duplicate_input(input_arr) != 0)
-	{
-		ft_free_input_arr(input_arr);
-		return (-1);
-	}
-	i = 0;
 	while (input_arr[i])
 	{
 		if (ft_is_valid_number(input_arr[i]) != 0 || (ft_atoi_long(input_arr[i])
@@ -109,6 +103,12 @@ int	ft_valid_input(char **input_arr)
 			return (-1);
 		}
 		i++;
+	}
+	i = 0;
+	if (ft_not_duplicate_input(input_arr) != 0)
+	{
+		ft_free_input_arr(input_arr);
+		return (-1);
 	}
 	return (0);
 }
