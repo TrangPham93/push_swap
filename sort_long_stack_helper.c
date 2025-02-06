@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:31:39 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 17:40:04 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:34:30 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,10 @@ int	calculate_moves_to_top(t_node *stack, t_node *node)
 	int	index;
 	int	stack_size;
 
-	// printf("debugging move to top \n");
 	index = find_index(stack, node);
-	// printf("node value %d, node index %d \n", node->content, node->index);
 	stack_size = stack_size_cal(stack);
-	// printf("stack_b size %d\n", stack_size);
 	if (index <= (stack_size / 2))
-	{
-		
-		// printf("calculate moves to top %d\n",index );
-		return ((int)index);
-	}
+		return (index);
 	else
-	{
-		// printf("calculate moves to top %d\n", stack_size - index);
 		return (stack_size - index);
-
-	}
 }

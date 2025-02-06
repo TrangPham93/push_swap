@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 19:53:52 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:33:03 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
 	// if (cal_size <= 5)
 	// 	break ;
 	mean = find_mean(*stack_a, cal_size);
-	// printf("mean of stack a %lld\n", mean);
 	if (cal_size > 5)
 	{
 		if ((long long)(*stack_a)->content <= mean)
@@ -66,11 +65,10 @@ t_node	*find_best_friend(t_node *stack_a, int nb)
 			temp_a = temp_a->next;
 		}
 	}
-	// printf("best friend: %d\n", best_friend->content);
 	return (best_friend);
 }
 
-void update_move_info(t_node *stack_a, t_node *stack_b) // update for stack_b
+void update_move_info(t_node *stack_a, t_node *stack_b)
 {
 	t_node	*temp;
 	

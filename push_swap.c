@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 19:39:46 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:30:44 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,11 @@ int	main(int argc, char *argv[])
 			return (0) ;
 		}
 		stack_size = stack_size_cal(stack_a);
-		// printf("size of stack_a %d\n", stack_size);
-		// print_list(stack_a);
-		// print_list(stack_b);
 		ft_memset(moves, 0, 999999);
 		ft_sort(&stack_a, &stack_b, stack_size, moves);
 	}
 	// print_list(stack_a);
 	// print_list(stack_b);
-	
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
@@ -79,27 +75,11 @@ void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 	else
 	{
 		i = partition_by_mean(stack_a, stack_b, stack_size, moves, i);
-		// printf("After partitioning:\n");
-		// print_list(*stack_a);
-		// print_list(*stack_b);
 		i = sort_stack_of_five(stack_a, stack_b, moves, i);
 		while (*stack_b)
-		{
 			i = execute_best_move(stack_a, stack_b, moves, i);
-			// print_list(*stack_a);
-		}
 		i = move_to_top_a(stack_a, find_min_node(*stack_a), moves, i);
 	}
-	// printf("value of i: %d\n", i);
-	// int	j = 0;
-	// while (moves[j] != '\0')
-	// {
-	// 	printf("%c ", moves[j]);
-	// 	j++;	
-	// }
-	
-	// printf("\n");
-	// printf("number of element in moves: %d\n", j-1);
 	print_moves(moves, i);
 }
 
@@ -114,12 +94,8 @@ void	print_moves(char moves[], int i)
 	{
 		temp = j;
 		j = optimized_move(moves, j);
-		// printf("temp value %d & j value %d\n:", temp, j);
 		if (j == temp)
-		{
-			// printf("normal moves \n");
 			normal_move(moves, j);
-		}
 		j++;
 	}
 }

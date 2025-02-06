@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/05 17:25:32 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:33:30 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,9 @@ t_node		*find_best_friend(t_node *stack_a, int nb);
 int			*stack_dup(t_node	*stack_a, int size);
 long long	find_mean(t_node *stack, int size);
 int			calculate_moves_to_top(t_node *stack, t_node *node);
-// int	calculate_moves_to_top(t_node *stack, int nb);
-
 
 void		print_moves(char moves[], int i);
+// update node details for stack_b
 void 		update_move_info(t_node *stack_a, t_node *stack_b);
 
 #endif
