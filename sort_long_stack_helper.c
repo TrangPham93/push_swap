@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:31:39 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:34:30 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:40:11 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	*stack_dup(t_node	*stack_a, int size)
 	int		*stack_a_dup;
 	t_node	*temp;
 	int		i;
-	
+
 	stack_a_dup = malloc((size) * sizeof(int));
 	if (!stack_a_dup)
 		exit (-1);
@@ -37,8 +37,8 @@ int	*stack_dup(t_node	*stack_a, int size)
 long long	find_mean(t_node *stack, int size)
 {
 	long long	mean;
-	long long		sum;
-	t_node	*temp;
+	long long	sum;
+	t_node		*temp;
 
 	sum = 0;
 	temp = stack;

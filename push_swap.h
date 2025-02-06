@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:33:30 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:44:39 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void		error(void);
 
 int			sort_stack_of_two(t_node **stack_a, char moves[], int i);
 int			sort_stack_of_three(t_node	**stack_a, char moves[], int i);
-int 		sort_stack_of_four(t_node **stack_a, t_node **stack_b, char moves[],
+int			sort_stack_of_four(t_node **stack_a, t_node **stack_b, char moves[],
 				int i);
-int	 		sort_stack_of_five(t_node **stack_a, t_node **stack_b, char moves[],
+int			sort_stack_of_five(t_node **stack_a, t_node **stack_b, char moves[],
 				int i);
 void		ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 				char moves[]);
@@ -83,8 +83,8 @@ int			partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
 				char moves[], int i);
 int			execute_best_move(t_node **stack_a, t_node **stack_b, char moves[],
 				int i);
-int			optimized_move(char	moves[], int i);
-void		normal_move(char	moves[], int i);
+int			optimized_move(char moves[], int i);
+void		normal_move(char moves[], int i);
 
 int			find_index(t_node *stack, t_node *node);
 t_node		*find_min_node(t_node *stack);
@@ -94,7 +94,8 @@ long long	find_mean(t_node *stack, int size);
 int			calculate_moves_to_top(t_node *stack, t_node *node);
 
 void		print_moves(char moves[], int i);
+
 // update node details for stack_b
-void 		update_move_info(t_node *stack_a, t_node *stack_b);
+void		update_move_info(t_node *stack_a, t_node *stack_b);
 
 #endif

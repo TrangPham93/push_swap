@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:21:58 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:31:52 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:39:35 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	sort_stack_of_two(t_node **stack_a, char moves[], int i)
 {
 	if ((*stack_a)->content > (*stack_a)->next->content)
 		i = sa(stack_a, moves, i);
-	return (i);	
+	return (i);
 }
 
 int	sort_stack_of_three(t_node	**stack_a, char moves[], int i)
@@ -30,7 +30,6 @@ int	sort_stack_of_three(t_node	**stack_a, char moves[], int i)
 	a = (*stack_a)->content;
 	b = (*stack_a)->next->content;
 	c = (*stack_a)->next->next->content;
-
 	if (a < c && c < b)
 	{
 		i = rra(stack_a, moves, i);
@@ -49,6 +48,7 @@ int	sort_stack_of_three(t_node	**stack_a, char moves[], int i)
 	}
 	return (i);
 }
+
 int	sort_stack_of_four(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {
 	t_node	*min_node;
@@ -64,7 +64,7 @@ int	sort_stack_of_four(t_node **stack_a, t_node **stack_b, char moves[], int i)
 int	sort_stack_of_five(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {
 	t_node	*min_node;
-	int	count;
+	int		count;
 
 	count = 0;
 	while (count < 2)

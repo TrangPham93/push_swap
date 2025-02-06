@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:30:44 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 11:46:31 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char *argv[])
 		if (stack_a == NULL)
 		{
 			free_stack(stack_a);
-			return (0) ;
+			return (0);
 		}
 		stack_size = stack_size_cal(stack_a);
 		ft_memset(moves, 0, 999999);
@@ -56,7 +56,7 @@ int	main(int argc, char *argv[])
 
 void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 				char moves[])
-{	
+{
 	int	i;
 
 	i = 0;
@@ -67,7 +67,7 @@ void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 	else if (stack_size == 2)
 		i = sort_stack_of_two(stack_a, moves, i);
 	else if (stack_size == 3)
-		i =	sort_stack_of_three(stack_a, moves, i);
+		i = sort_stack_of_three(stack_a, moves, i);
 	else if (stack_size == 4)
 		i = sort_stack_of_four(stack_a, stack_b, moves, i);
 	else if (stack_size == 5)
@@ -100,7 +100,7 @@ void	print_moves(char moves[], int i)
 	}
 }
 
-int	optimized_move(char	moves[], int i)
+int	optimized_move(char moves[], int i)
 {
 	if (moves[i] == '\0' || moves[i + 1] == '\0')
 		return (i);
@@ -115,7 +115,7 @@ int	optimized_move(char	moves[], int i)
 	{
 		write(1, "rr\n", 3);
 		i++;
-	}	
+	}
 	else if ((moves[i] == '5' && moves[i + 1] == '6')
 		|| (moves[i] == '6' && moves[i + 1] == '5'))
 	{
