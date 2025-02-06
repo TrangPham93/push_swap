@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:14:57 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:21:33 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void		ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 
 int			move_to_top_a(t_node **stack_a, t_node *node, char moves[], int i);
 int			move_to_top_b(t_node **stack_b, t_node *node, char moves[], int i);
-int			partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
-				char moves[], int i);
+int			partition_by_mean(t_node **stack_a, t_node **stack_b, char moves[],
+				int i);
 int			execute_best_move(t_node **stack_a, t_node **stack_b, char moves[],
 				int i);
 int			optimized_move(char moves[], int i);

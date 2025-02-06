@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:53:48 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:07:11 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:27:01 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_is_valid_number(char	*str)
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
+	if (!str[i])
+		error();
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')

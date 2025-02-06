@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:34:57 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 16:56:14 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:24:22 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	main(int argc, char *argv[])
 			free_stack(stack_a);
 			return (0);
 		}
-		printf("initial input :\n");
-		print_list(stack_a);
+		// printf("initial input :\n");
+		// print_list(stack_a);
 		stack_size = stack_size_cal(stack_a);
 		ft_memset(moves, 0, 999999);
 		ft_sort(&stack_a, &stack_b, stack_size, moves);
@@ -64,7 +64,7 @@ void	ft_sort(t_node **stack_a, t_node **stack_b, int stack_size,
 		i = sort_stack_of_five(stack_a, stack_b, moves, i);
 	else
 	{
-		i = partition_by_mean(stack_a, stack_b, stack_size, moves, i);
+		i = partition_by_mean(stack_a, stack_b, moves, i);
 		i = sort_stack_of_five(stack_a, stack_b, moves, i);
 		while (*stack_b)
 			i = execute_best_move(stack_a, stack_b, moves, i);

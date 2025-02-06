@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:49:10 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:24:03 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 #include "./libft/includes/libft.h"
 #include "./libft/includes/ft_printf.h"
 
-int	partition_by_mean(t_node **stack_a, t_node **stack_b, int cal_size,
-			char moves[], int i)
+int	partition_by_mean(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {
 	long long	mean;
+	int			cal_size;
 
-	// if (cal_size <= 5)
-	// 	break ;
-	mean = find_mean(*stack_a, cal_size);
+	cal_size = stack_size_cal(*stack_a);
 	if (cal_size > 5)
 	{
+		mean = find_mean(*stack_a, cal_size);
 		if ((long long)(*stack_a)->content <= mean)
 			i = pb(stack_a, stack_b, moves, i);
 		else
-		{
 			i = ra(stack_a, moves, i);
-		}
-		cal_size = stack_size_cal(*stack_a);
-		i = partition_by_mean(stack_a, stack_b, cal_size, moves, i);
+		i = partition_by_mean(stack_a, stack_b, moves, i);
 	}
 	return (i);
 }
@@ -50,8 +46,6 @@ t_node	*find_best_friend(t_node *stack_a, int nb)
 			if (!best_friend || temp_a->content < best_friend->content)
 				best_friend = temp_a;
 		}
-		// if (!temp_a->next)
-		// 	break;
 		temp_a = temp_a->next;
 	}
 	if (!best_friend) // can not find the best friend, place at the bottom (largest number)
