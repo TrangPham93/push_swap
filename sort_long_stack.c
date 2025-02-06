@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:24:03 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:40:55 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,12 @@ t_node	*find_best_friend(t_node *stack_a, int nb)
 	best_friend = NULL;
 	while (temp_a)
 	{
-		if ((temp_a->content) > nb)
-		{
-			if (!best_friend || temp_a->content < best_friend->content)
-				best_friend = temp_a;
-		}
+		if ((temp_a->content) > nb && (!best_friend
+				|| temp_a->content < best_friend->content))
+			best_friend = temp_a;
 		temp_a = temp_a->next;
 	}
-	if (!best_friend) // can not find the best friend, place at the bottom (largest number)
+	if (!best_friend)
 	{
 		best_friend = stack_a;
 		temp_a = stack_a->next;

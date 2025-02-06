@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:21:33 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:40:06 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void		normal_move(char moves[], int i);
 
 int			find_index(t_node *stack, t_node *node);
 t_node		*find_min_node(t_node *stack);
+// can not find the best friend, place at the bottom (largest number)
 t_node		*find_best_friend(t_node *stack_a, int nb);
 int			*stack_dup(t_node	*stack_a, int size);
 long long	find_mean(t_node *stack, int size);
