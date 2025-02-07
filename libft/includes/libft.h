@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 18:54:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/07 13:50:52 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:41:54 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *nptr);
 
-// ft_strlen have check for null string, compared to original strlen()
+
 size_t	ft_strlen(const char *s);
-// recheck if we need to check null striing? strlcpy
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-// recheck if we need to check null striing? strlcat
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
-// added, is it ok to save here
 int		ft_strcmp(const char *s1, const char *s2);
 
-// recheck if we need to check null striing? strncmp
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
