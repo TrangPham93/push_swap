@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:04:33 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:41:34 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:25:58 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ int	stack_size_cal(t_node *lst)
 		lst = lst->next;
 	}
 	return (count);
-}
-
-void	print_list(t_node *lst)
-{
-	if (lst == NULL)
-		return ;
-	while (lst)
-	{
-		printf("%d ", lst->content);
-		lst = lst->next;
-	}
-	printf("\n");
 }
 
 void	free_stack(t_node *lst)

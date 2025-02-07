@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:41:55 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:40:06 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:26:11 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "./libft/includes/libft.h"
 # include "./libft/includes/ft_printf.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <errno.h>
 
 typedef struct s_node
 {
@@ -53,7 +50,6 @@ int			pb(t_node **stack_a, t_node **stack_b, char moves[], int i);
 int			pa(t_node **stack_b, t_node **stack_a, char moves[], int i);
 
 int			stack_size_cal(t_node *lst);
-void		print_list(t_node *lst);
 void		free_stack(t_node *lst);
 t_node		*ft_doubly_lstnew(int content);
 t_node		*create_stack(char	**arr);
