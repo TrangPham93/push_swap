@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:53:48 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:27:01 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:29:22 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 int	ft_is_valid_number(char	*str)
 {

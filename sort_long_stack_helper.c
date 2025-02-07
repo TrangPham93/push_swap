@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:31:39 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 11:40:11 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:30:01 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 int	*stack_dup(t_node	*stack_a, int size)
 {

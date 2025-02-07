@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:50:11 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 18:22:35 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:29:18 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 int	ft_empty_str(char *str)
 {

@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:29:14 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 17:40:55 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:30:06 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 int	partition_by_mean(t_node **stack_a, t_node **stack_b, char moves[], int i)
 {

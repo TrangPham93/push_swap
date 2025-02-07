@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:50:31 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/06 16:50:58 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:29:42 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 void	print_moves(char moves[], int i)
 {

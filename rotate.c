@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:37:45 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 15:00:40 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:29:57 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 void	rotate_stack(t_node **lst)
 {

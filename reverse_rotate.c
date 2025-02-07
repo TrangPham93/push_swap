@@ -6,13 +6,11 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:41:43 by trpham            #+#    #+#             */
-/*   Updated: 2025/02/04 12:53:53 by trpham           ###   ########.fr       */
+/*   Updated: 2025/02/07 14:29:54 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "./libft/includes/libft.h"
-#include "./libft/includes/ft_printf.h"
 
 void	reverse_rotate(t_node **lst)
 {
