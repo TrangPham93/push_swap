@@ -54,8 +54,7 @@ make
 
 #### 4. Examples
 
-<img width="400" height="80" alt="image" src="https://github.com/user-attachments/assets/eda6adf1-7afe-4183-99cb-58d7672a393c" />
-
+<img width="400" height="80" alt="image" src="https://github.com/user-attachments/assets/2fd1a5cd-bf80-41e3-af07-d3d986ba8d59" />
 
 ## Authors
 
