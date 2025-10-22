@@ -6,34 +6,31 @@ push_swap is an individual project developed at Hive Helsinki (the 42 Network) a
 
 The main goal is to **sort a list of integers** using a **limited set of stack operations** and **two stacks (A and B)**,
 with the focus on **algorithmic optimization** and **time complexity**.
-
 You are required to print to standard output the **shortest possible sequence of operations** that sorts the stack in ascending order.  
 This project strengthens your understanding of **data structures**, **sorting algorithms**, and **algorithmic efficiency**.
 
 ## Features:
-
-
-- **Efficient Sorting Algorithm**  
-  Uses a combination of tailored sorting strategies depending on the size of the input:  
-  - *Small inputs (≤ 5 elements)*: Simple swaps and rotations (hardcoded patterns).  
-  - *Medium inputs (≤ 100 elements)*: Chunk-based sorting.  
-  - *Large inputs (> 100 elements)*: Optimized radix sort or chunked approach for minimal operations.
-
-- **Custom Stack Implementation**  
-  - Built from scratch using linked lists.  
-  - Supports efficient push, pop, rotate, and reverse operations.
-
-- **Validated Input Handling**  
+🔹 **Validated Input Handling**  
   - Detects duplicates, non-integer values, and integer overflow.  
   - Handles both positive and negative integers.
 
-- **Operation Set Supported**  
+🔹 **Custom Stack Implementation**  
+  - Built from scratch using linked lists.  
+  - Supports efficient push, pop, rotate, and reverse operations.
+
+🔹 **Operation Set Supported**  
   | Operation | Description |
   |------------|-------------|
   | `sa`, `sb`, `ss` | Swap the top two elements of stack A and/or B |
   | `pa`, `pb` | Push top element from one stack to another |
   | `ra`, `rb`, `rr` | Rotate stack upwards |
   | `rra`, `rrb`, `rrr` | Reverse rotate stack downwards |
+  
+🔹 **Efficient Sorting Algorithm**  
+  Uses a combination of tailored sorting strategies depending on the size of the input:  
+  - *Small inputs (≤ 5 elements)*: Simple swaps and rotations (hardcoded patterns).  
+  - *Medium inputs (≤ 100 elements)*: Chunk-based sorting.  
+  - *Large inputs (> 100 elements)*: Optimized radix sort or chunked approach for minimal operations.
 
 ## How To Run:
 
@@ -43,8 +40,8 @@ Linux OS
 ### Installment:
 #### 1. Clone the Repository
 ```bash
-git clone git@github.com:TrangPham93/minishell_Hive_Helsinki.git minishell
-cd minishell
+git clone git@github.com:TrangPham93/push_swap.git push_swap
+cd push_swap
 ```
 #### 2. Compile the Project
 ```bash
