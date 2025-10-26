@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/02/06 16:54:48 by trpham           ###   ########.fr        #
+#    Updated: 2025/10/26 15:44:08 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,18 +38,19 @@ LIBFT_NAME = $(LIBFT_DIR)/libft.a
 all: $(NAME)
 
 %.o: %.c push_swap.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT_NAME):
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT_NAME)
-	$(CC) $(CFLAGS) $^ -o $@
-#	ar rcs $(NAME) $^ 
+	@$(CC) $(CFLAGS) $^ -o $@
+	@echo "Compiled push_swap"
 
 clean:
 	@make clean -C $(LIBFT_DIR)
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
+	@echo "Clean objs"
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
