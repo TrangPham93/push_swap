@@ -1,36 +1,38 @@
 # push_swap
 
-## About Project 
-
-push_swap is an individual project developed at Hive Helsinki (the 42 Network) as part of curriculum. 
-
-The main goal is to **sort a list of integers** using a **limited set of stack operations** and **two stacks (A and B)**,
-with the focus on **algorithmic optimization** and **time complexity**.
-You are required to print to standard output the **shortest possible sequence of operations** that sorts the stack in ascending order.  
-This project strengthens your understanding of **data structures**, **sorting algorithms**, and **algorithmic efficiency**.
+push_swap implements a sorting algorithm to **sort a list of integers** using a **limited set of stack operations** and **two stacks (A and B)**.
+The **shortest possible sequence of operations** that sorts the stack in ascending order will be printed to standard output.
 
 ## Features:
-🔹 **Validated Input Handling**  
-  - Detects duplicates, non-integer values, and integer overflow.  
+🔹 Input requirements  
+  - Duplicates, non-integer values are not allowed and integer overflow is detected.  
   - Handles both positive and negative integers.
 
-🔹 **Custom Stack Implementation**  
+🔹 Custom Stack Implementation
   - Built from scratch using linked lists.  
-  - Supports efficient push, pop, rotate, and reverse operations.
+  - Supports stack operations like push, swap, rotate and reverse rotate.
 
-🔹 **Operation Set Supported**  
+🔹 Operation Set
   | Operation | Description |
   |------------|-------------|
-  | `sa`, `sb`, `ss` | Swap the top two elements of stack A and/or B |
-  | `pa`, `pb` | Push top element from one stack to another |
-  | `ra`, `rb`, `rr` | Rotate stack upwards |
-  | `rra`, `rrb`, `rrr` | Reverse rotate stack downwards |
+  | `sa`, `sb` | Swap the top two elements of stack A or B |
+  | `pa`, `pb` | Push top element from one B to A or A to B |
+  | `ra`, `rb` | Shift all elements of stack A or B up by 1 position |
+  | `rra`, `rrb` | Shift all elements of stack A or B down by 1 position |
+  |`ss`, `rr`, `rrr` | Do swap or rotate or reverse rotate on both stacks at the same time |
   
-🔹 **Efficient Sorting Algorithm**  
-  Uses a combination of tailored sorting strategies depending on the size of the input:  
-  - *Small inputs (≤ 5 elements)*: Simple swaps and rotations (hardcoded patterns).  
-  - *Medium inputs (≤ 100 elements)*: Chunk-based sorting.  
-  - *Large inputs (> 100 elements)*: Optimized radix sort or chunked approach for minimal operations.
+🔹 Sorting Algorithm
+  Depending on the size of the input:  
+  - 1 element or already sorted list: no operation and return.
+  - Small list (≤ 5 elements): Simple swaps and rotations (hardcoded patterns).  
+  - If input list has more than 5 elements:
+    - I use an array to save all the operation: push, swap, rotate and reverse rotate during the below process.
+    - While there are more than 5 elements in stack A, repeat: find `mean` of the stack A: all elements smaller or equal to `mean` pushed to stack B, otherwise rotate stack A to the next element.
+    - When stack A has only 5 elements left, use sorting function for 5 elements as above.
+    - For each element in stack B, find the smallest element in stack A that is larger than the number in stack B (best friend), and calculate how many moves it takes for each element and its best friend to move to top. Implement the best move that has the smallest number of operations to move an element in stack B and its friend in stack A to top, and push the element from stack B to A. Repeating this process until there is nothing left in stack B.
+    - Reorder the stack A in ascending order.
+    - Finally, optimize the operation array and print to standard output: if 2 swap operations or 2 rotate operations or 2 reverse rotate operation are next to each other in the array, I use the `ss` or `rr` or `rrr` operation on both stacks at the same time instead.
+
 
 ## How To Run:
 
@@ -40,7 +42,7 @@ Linux OS
 ### Installment:
 #### 1. Clone the Repository
 ```bash
-git clone git@github.com:TrangPham93/push_swap.git push_swap
+git clone https://github.com/TrangPham93/push_swap.git push_swap
 cd push_swap
 ```
 #### 2. Compile the Project
@@ -53,10 +55,15 @@ make
 ```
 
 #### 4. Examples
+Sort a simple list of interger and use checker_linux provided by the subject to recheck the sorting command.
 
-<img width="400" height="80" alt="image" src="https://github.com/user-attachments/assets/2fd1a5cd-bf80-41e3-af07-d3d986ba8d59" />
+<img width="632" height="252" alt="image" src="https://github.com/user-attachments/assets/07febf63-7ebc-4247-a360-15186171d84a" />
 
-## Authors
+#### 5. Visualize the sorting algorithm
+[This is a great tool I found to visualize the sorting process](https://push-swap42-visualizer.vercel.app/)
 
-Trang Pham – GitHub <https://github.com/TrangPham93>
+![Untitled video](https://github.com/user-attachments/assets/d6a934cd-c2ed-4b3d-b946-426149a93157)
+
+
+
 
